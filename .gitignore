@@ -1,42 +1,12 @@
-# Private strategy documents - DO NOT COMMIT
-linkedin-optimization.md
-email-marketing-system.md
-youtube-strategy.md
-monetization-strategy.md
-backend-setup.md
-implementation-roadmap.md
-brand-identity-system.md
-synthetic-data-strategy.md
-multi-industry-implementation-roadmap.md
-multi-industry-synthetic-data-framework.md
-sql-learning-environment.md
-enhanced-platform-architecture.md
-deployment-interactive-platform.md
-comprehensive-industry-expansion.md
-blog-post-outlines.md
-email-setup-guide.md
-dns-setup-instructions.md
-github-upload-guide.md
-hosting-strategy-2025.md
-
-# Keep only public-facing files
-# index.html is OK to be public
-# interactive-index.html is OK
-# multi-language-platform.html is OK
-
-# Mac system files
+# System files
 .DS_Store
+Thumbs.db
 
-# Backup files
-*.backup
-*.bak
+# Temporary files
+*.tmp
+*.temp
 *~
 
-# Environment variables
-.env
-.env.local
-
-# API Keys
-config.js
-secrets.json
-api-keys.txt
+# Private files
+*.private
+*.local
