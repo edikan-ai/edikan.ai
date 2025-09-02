@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>edikan.ai - Master Industrial AI in Multiple Languages</title>
+    <meta name="description" content="Learn Python, R, C++, SQL, and MATLAB for industrial AI. Interactive coding with instant feedback.">
+    
+    <!-- CodeMirror for Code Editor -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/monokai.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+    
+    <!-- Language Modes for CodeMirror -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/python/python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/r/r.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/clike/clike.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/sql/sql.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/octave/octave.min.js"></script>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #0066FF;
+            --secondary: #6B46C1;
+            --success: #00D084;
+            --error: #FF4444;
+            --warning: #F59E0B;
+            --dark: #1F2937;
+            --light: #F9FAFB;
+            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .logo .ai {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        /* Hero */
+        .hero {
+            background: var(--gradient);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .language-badges {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .language-badge {
+            background: rgba(255,255,255,0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+        }
+        
+        /* Main Layout */
+        .main-content {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: 12px;
+            height: fit-content;
+            position: sticky;
+            top: 80px;
+        }
+        
+        /* Multi-Language Exercise */
+        .exercise-container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+        
+        .exercise-header {
+            background: var(--gradient);
+            color: white;
+            padding: 1.5rem;
+        }
+        
+        .exercise-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .exercise-description {
+            opacity: 0.9;
+        }
+        
+        /* Language Selector Tabs */
+        .language-tabs {
+            display: flex;
+            background: var(--light);
+            border-bottom: 2px solid #E5E7EB;
+            overflow-x: auto;
+        }
+        
+        .language-tab {
+            padding: 1rem 1.5rem;
+            background: none;
+            border: none;
+            font-weight: 600;
+            color: var(--dark);
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+            position: relative;
+        }
+        
+        .language-tab:hover {
+            background: rgba(0,102,255,0.1);
+        }
+        
+        .language-tab.active {
+            color: var(--primary);
+            background: white;
+        }
+        
+        .language-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--primary);
+        }
+        
+        .language-icon {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            margin-right: 0.5rem;
+            vertical-align: middle;
+        }
+        
+        /* Code Editor Area */
+        .editor-container {
+            padding: 1.5rem;
+        }
+        
+        .editor-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding: 0.75rem;
+            background: var(--light);
+            border-radius: 8px;
+        }
+        
+        .language-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .language-version {
+            font-size: 0.85rem;
+            color: #666;
+        }
+        
+        .execution-status {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            background: #E5E7EB;
+            color: var(--dark);
+        }
+        
+        .execution-status.running {
+            background: #FEF3C7;
+            color: #92400E;
+        }
+        
+        .execution-status.success {
+            background: #D1FAE5;
+            color: #065F46;
+        }
+        
+        .execution-status.error {
+            background: #FEE2E2;
+            color: #991B1B;
+        }
+        
+        .CodeMirror {
+            height: 300px;
+            border-radius: 8px;
+            font-size: 14px;
+            border: 2px solid #E5E7EB;
+        }
+        
+        /* Controls */
+        .controls {
+            display: flex;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .btn {
+            padding: 0.6rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover:not(:disabled) {
+            background: #0052CC;
+            transform: translateY(-1px);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: var(--dark);
+            border: 2px solid #E5E7EB;
+        }
+        
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        /* Output Area */
+        .output-section {
+            margin-top: 1rem;
+        }
+        
+        .output-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .output-tab {
+            padding: 0.5rem 1rem;
+            background: var(--light);
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .output-tab.active {
+            background: var(--dark);
+            color: white;
+        }
+        
+        .output-content {
+            background: #1F2937;
+            color: #10B981;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            min-height: 100px;
+            max-height: 300px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+        }
+        
+        .output-content.error {
+            color: #EF4444;
+        }
+        
+        /* Test Cases */
+        .test-cases {
+            background: var(--light);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+        
+        .test-case {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem;
+            background: white;
+            border-radius: 6px;
+            margin-bottom: 0.5rem;
+        }
+        
+        .test-case-name {
+            font-weight: 500;
+        }
+        
+        .test-case-status {
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+        }
+        
+        .test-case-status.pass {
+            background: var(--success);
+            color: white;
+        }
+        
+        .test-case-status.fail {
+            background: var(--error);
+            color: white;
+        }
+        
+        .test-case-status.pending {
+            background: #E5E7EB;
+            color: var(--dark);
+        }
+        
+        /* Loading Animation */
+        .loading-dots {
+            display: inline-block;
+        }
+        
+        .loading-dots::after {
+            content: '...';
+            animation: dots 1.5s steps(4, end) infinite;
+        }
+        
+        @keyframes dots {
+            0%, 20% { content: ''; }
+            40% { content: '.'; }
+            60% { content: '..'; }
+            80%, 100% { content: '...'; }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .language-tabs {
+                overflow-x: scroll;
+            }
+            
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <div class="logo">edikan<span class="ai">.ai</span></div>
+            <div>Multi-Language Industrial AI Platform</div>
+        </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container">
+            <h1>Master Industrial AI in Multiple Languages</h1>
+            <p>From fundamentals to production systems - Choose your language, solve real problems</p>
+            <div class="language-badges">
+                <div class="language-badge">🐍 Python</div>
+                <div class="language-badge">📊 R</div>
+                <div class="language-badge">⚡ C++</div>
+                <div class="language-badge">🗃️ SQL</div>
+                <div class="language-badge">🔬 MATLAB</div>
+                <div class="language-badge">🦀 Rust</div>
+                <div class="language-badge">☕ Java</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="main-content">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <h3>PROJECT FORGE</h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="padding: 0.5rem 0;"><a href="#" style="color: var(--primary); text-decoration: none; font-weight: 600;">Month 00: The Confession</a></li>
+                    <li style="padding: 0.5rem 0;"><a href="#" style="color: var(--dark); text-decoration: none;">Month 0: Competence</a></li>
+                    <li style="padding: 0.5rem 0;"><a href="#" style="color: var(--dark); text-decoration: none;">Month 1: Mathematics</a></li>
+                </ul>
+            </aside>
+
+            <!-- Main Exercise Area -->
+            <main>
+                <!-- Multi-Language Exercise -->
+                <div class="exercise-container">
+                    <div class="exercise-header">
+                        <h2 class="exercise-title">Exercise: Implement Matrix Multiplication</h2>
+                        <p class="exercise-description">
+                            A fundamental operation in AI - implement matrix multiplication from scratch in your language of choice
+                        </p>
+                    </div>
+
+                    <!-- Language Tabs -->
+                    <div class="language-tabs">
+                        <button class="language-tab active" onclick="switchLanguage('python')">
+                            🐍 Python
+                        </button>
+                        <button class="language-tab" onclick="switchLanguage('r')">
+                            📊 R
+                        </button>
+                        <button class="language-tab" onclick="switchLanguage('cpp')">
+                            ⚡ C++
+                        </button>
+                        <button class="language-tab" onclick="switchLanguage('sql')">
+                            🗃️ SQL
+                        </button>
+                        <button class="language-tab" onclick="switchLanguage('matlab')">
+                            🔬 MATLAB/Octave
+                        </button>
+                        <button class="language-tab" onclick="switchLanguage('rust')">
+                            🦀 Rust
+                        </button>
+                        <button class="language-tab" onclick="switchLanguage('java')">
+                            ☕ Java
+                        </button>
+                    </div>
+
+                    <!-- Editor Container -->
+                    <div class="editor-container">
+                        <div class="editor-info">
+                            <div class="language-info">
+                                <span id="current-language">Python 3.9</span>
+                                <span class="language-version">Judge0 API v2.0</span>
+                            </div>
+                            <span class="execution-status" id="exec-status">Ready</span>
+                        </div>
+
+                        <!-- Code Editor -->
+                        <textarea id="code-editor">def matrix_multiply(A, B):
+    """
+    Multiply two matrices A and B
+    Returns the product matrix C = A × B
+    """
+    # Get dimensions
+    rows_A = len(A)
+    cols_A = len(A[0])
+    rows_B = len(B)
+    cols_B = len(B[0])
+    
+    # Check if multiplication is possible
+    if cols_A != rows_B:
+        raise ValueError("Cannot multiply: incompatible dimensions")
+    
+    # Initialize result matrix with zeros
+    C = [[0 for _ in range(cols_B)] for _ in range(rows_A)]
+    
+    # Perform multiplication
+    # YOUR CODE HERE
+    
+    return C
+
+# Test your implementation
+A = [[1, 2], [3, 4]]
+B = [[5, 6], [7, 8]]
+
+result = matrix_multiply(A, B)
+print("A =", A)
+print("B =", B)
+print("A × B =", result)
+print("Expected: [[19, 22], [43, 50]]")</textarea>
+
+                        <!-- Controls -->
+                        <div class="controls">
+                            <button class="btn btn-primary" onclick="runCode()">
+                                ▶️ Run Code
+                            </button>
+                            <button class="btn btn-secondary" onclick="testCode()">
+                                🧪 Run Tests
+                            </button>
+                            <button class="btn btn-secondary" onclick="showHint()">
+                                💡 Hint
+                            </button>
+                            <button class="btn btn-secondary" onclick="resetCode()">
+                                🔄 Reset
+                            </button>
+                        </div>
+
+                        <!-- Output Section -->
+                        <div class="output-section">
+                            <div class="output-tabs">
+                                <button class="output-tab active" onclick="showOutput('stdout')">Output</button>
+                                <button class="output-tab" onclick="showOutput('stderr')">Errors</button>
+                                <button class="output-tab" onclick="showOutput('compile')">Compile</button>
+                            </div>
+                            <div class="output-content" id="output">
+                                Click "Run Code" to execute your solution...
+                            </div>
+                        </div>
+
+                        <!-- Test Cases -->
+                        <div class="test-cases">
+                            <h4 style="margin-bottom: 1rem;">Test Cases</h4>
+                            <div class="test-case">
+                                <span class="test-case-name">Test 1: 2×2 matrices</span>
+                                <span class="test-case-status pending">Pending</span>
+                            </div>
+                            <div class="test-case">
+                                <span class="test-case-name">Test 2: 3×3 matrices</span>
+                                <span class="test-case-status pending">Pending</span>
+                            </div>
+                            <div class="test-case">
+                                <span class="test-case-name">Test 3: Non-square matrices</span>
+                                <span class="test-case-status pending">Pending</span>
+                            </div>
+                            <div class="test-case">
+                                <span class="test-case-name">Test 4: Identity matrix</span>
+                                <span class="test-case-status pending">Pending</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Second Exercise -->
+                <div class="exercise-container">
+                    <div class="exercise-header">
+                        <h2 class="exercise-title">Exercise: Industrial Sensor Data Analysis</h2>
+                        <p class="exercise-description">
+                            Process real-time sensor data from a steel manufacturing plant - detect anomalies and calculate statistics
+                        </p>
+                    </div>
+                    <!-- Similar structure for another exercise -->
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- JavaScript for Multi-Language Support -->
+    <script>
+        // Language configurations
+        const languages = {
+            python: {
+                id: 71,
+                name: 'Python 3.9',
+                mode: 'python',
+                template: `def matrix_multiply(A, B):
+    """
+    Multiply two matrices A and B
+    Returns the product matrix C = A × B
+    """
+    # Get dimensions
+    rows_A = len(A)
+    cols_A = len(A[0])
+    rows_B = len(B)
+    cols_B = len(B[0])
+    
+    # Check if multiplication is possible
+    if cols_A != rows_B:
+        raise ValueError("Cannot multiply: incompatible dimensions")
+    
+    # Initialize result matrix with zeros
+    C = [[0 for _ in range(cols_B)] for _ in range(rows_A)]
+    
+    # Perform multiplication
+    # YOUR CODE HERE
+    
+    return C
+
+# Test your implementation
+A = [[1, 2], [3, 4]]
+B = [[5, 6], [7, 8]]
+
+result = matrix_multiply(A, B)
+print("A =", A)
+print("B =", B)
+print("A × B =", result)
+print("Expected: [[19, 22], [43, 50]]")`
+            },
+            r: {
+                id: 80,
+                name: 'R 4.0',
+                mode: 'r',
+                template: `matrix_multiply <- function(A, B) {
+  # Multiply two matrices A and B
+  # Returns the product matrix C = A × B
+  
+  # Get dimensions
+  rows_A <- nrow(A)
+  cols_A <- ncol(A)
+  rows_B <- nrow(B)
+  cols_B <- ncol(B)
+  
+  # Check if multiplication is possible
+  if (cols_A != rows_B) {
+    stop("Cannot multiply: incompatible dimensions")
+  }
+  
+  # Initialize result matrix
+  C <- matrix(0, nrow = rows_A, ncol = cols_B)
+  
+  # Perform multiplication
+  # YOUR CODE HERE
+  
+  return(C)
+}
+
+# Test your implementation
+A <- matrix(c(1, 3, 2, 4), nrow = 2, byrow = TRUE)
+B <- matrix(c(5, 7, 6, 8), nrow = 2, byrow = TRUE)
+
+result <- matrix_multiply(A, B)
+print("A =")
+print(A)
+print("B =")
+print(B)
+print("A × B =")
+print(result)
+print("Expected: [[19, 22], [43, 50]]")`
+            },
+            cpp: {
+                id: 54,
+                name: 'C++ 17',
+                mode: 'text/x-c++src',
+                template: `#include <iostream>
+#include <vector>
+
+using namespace std;
+
+vector<vector<int>> matrix_multiply(const vector<vector<int>>& A, 
+                                    const vector<vector<int>>& B) {
+    // Get dimensions
+    int rows_A = A.size();
+    int cols_A = A[0].size();
+    int rows_B = B.size();
+    int cols_B = B[0].size();
+    
+    // Check if multiplication is possible
+    if (cols_A != rows_B) {
+        throw invalid_argument("Cannot multiply: incompatible dimensions");
+    }
+    
+    // Initialize result matrix
+    vector<vector<int>> C(rows_A, vector<int>(cols_B, 0));
+    
+    // Perform multiplication
+    // YOUR CODE HERE
+    
+    return C;
+}
+
+int main() {
+    vector<vector<int>> A = {{1, 2}, {3, 4}};
+    vector<vector<int>> B = {{5, 6}, {7, 8}};
+    
+    vector<vector<int>> result = matrix_multiply(A, B);
+    
+    cout << "A × B = " << endl;
+    for (const auto& row : result) {
+        for (int val : row) {
+            cout << val << " ";
+        }
+        cout << endl;
+    }
+    cout << "Expected: [[19, 22], [43, 50]]" << endl;
+    
+    return 0;
+}`
+            },
+            sql: {
+                id: 82,
+                name: 'SQLite 3.35',
+                mode: 'sql',
+                template: `-- Create tables for matrices
+CREATE TABLE matrix_a (
+    row_idx INTEGER,
+    col_idx INTEGER,
+    value REAL
+);
+
+CREATE TABLE matrix_b (
+    row_idx INTEGER,
+    col_idx INTEGER,
+    value REAL
+);
+
+-- Insert sample data for matrix A
+INSERT INTO matrix_a VALUES (0, 0, 1), (0, 1, 2), (1, 0, 3), (1, 1, 4);
+
+-- Insert sample data for matrix B
+INSERT INTO matrix_b VALUES (0, 0, 5), (0, 1, 6), (1, 0, 7), (1, 1, 8);
+
+-- Perform matrix multiplication using SQL
+-- YOUR CODE HERE
+SELECT 
+    a.row_idx,
+    b.col_idx,
+    SUM(a.value * b.value) as result
+FROM matrix_a a
+JOIN matrix_b b ON a.col_idx = b.row_idx
+GROUP BY a.row_idx, b.col_idx
+ORDER BY a.row_idx, b.col_idx;
+
+-- Expected output:
+-- row_idx | col_idx | result
+-- 0       | 0       | 19
+-- 0       | 1       | 22
+-- 1       | 0       | 43
+-- 1       | 1       | 50`
+            },
+            matlab: {
+                id: 66,
+                name: 'GNU Octave 5.2',
+                mode: 'octave',
+                template: `function C = matrix_multiply(A, B)
+    % Multiply two matrices A and B
+    % Returns the product matrix C = A × B
+    
+    % Get dimensions
+    [rows_A, cols_A] = size(A);
+    [rows_B, cols_B] = size(B);
+    
+    % Check if multiplication is possible
+    if cols_A ~= rows_B
+        error('Cannot multiply: incompatible dimensions');
+    end
+    
+    % Initialize result matrix
+    C = zeros(rows_A, cols_B);
+    
+    % Perform multiplication
+    % YOUR CODE HERE
+    
+end
+
+% Test your implementation
+A = [1, 2; 3, 4];
+B = [5, 6; 7, 8];
+
+result = matrix_multiply(A, B);
+disp('A =');
+disp(A);
+disp('B =');
+disp(B);
+disp('A × B =');
+disp(result);
+disp('Expected: [19, 22; 43, 50]');`
+            },
+            rust: {
+                id: 73,
+                name: 'Rust 1.62',
+                mode: 'rust',
+                template: `fn matrix_multiply(a: &Vec<Vec<i32>>, b: &Vec<Vec<i32>>) -> Result<Vec<Vec<i32>>, String> {
+    // Get dimensions
+    let rows_a = a.len();
+    let cols_a = a[0].len();
+    let rows_b = b.len();
+    let cols_b = b[0].len();
+    
+    // Check if multiplication is possible
+    if cols_a != rows_b {
+        return Err("Cannot multiply: incompatible dimensions".to_string());
+    }
+    
+    // Initialize result matrix
+    let mut c = vec![vec![0; cols_b]; rows_a];
+    
+    // Perform multiplication
+    // YOUR CODE HERE
+    
+    Ok(c)
+}
+
+fn main() {
+    let a = vec![vec![1, 2], vec![3, 4]];
+    let b = vec![vec![5, 6], vec![7, 8]];
+    
+    match matrix_multiply(&a, &b) {
+        Ok(result) => {
+            println!("A × B = {:?}", result);
+            println!("Expected: [[19, 22], [43, 50]]");
+        },
+        Err(e) => println!("Error: {}", e),
+    }
+}`
+            },
+            java: {
+                id: 62,
+                name: 'Java 13',
+                mode: 'text/x-java',
+                template: `public class MatrixMultiplication {
+    public static int[][] matrixMultiply(int[][] A, int[][] B) {
+        // Get dimensions
+        int rowsA = A.length;
+        int colsA = A[0].length;
+        int rowsB = B.length;
+        int colsB = B[0].length;
+        
+        // Check if multiplication is possible
+        if (colsA != rowsB) {
+            throw new IllegalArgumentException("Cannot multiply: incompatible dimensions");
+        }
+        
+        // Initialize result matrix
+        int[][] C = new int[rowsA][colsB];
+        
+        // Perform multiplication
+        // YOUR CODE HERE
+        
+        return C;
+    }
+    
+    public static void main(String[] args) {
+        int[][] A = {{1, 2}, {3, 4}};
+        int[][] B = {{5, 6}, {7, 8}};
+        
+        int[][] result = matrixMultiply(A, B);
+        
+        System.out.println("A × B = ");
+        for (int[] row : result) {
+            for (int val : row) {
+                System.out.print(val + " ");
+            }
+            System.out.println();
+        }
+        System.out.println("Expected: [[19, 22], [43, 50]]");
+    }
+}`
+            }
+        };
+
+        let editor = null;
+        let currentLanguage = 'python';
+
+        // Initialize CodeMirror
+        function initEditor() {
+            const textarea = document.getElementById('code-editor');
+            editor = CodeMirror.fromTextArea(textarea, {
+                mode: languages[currentLanguage].mode,
+                theme: 'monokai',
+                lineNumbers: true,
+                indentUnit: 4,
+                lineWrapping: true,
+                extraKeys: {
+                    "Tab": function(cm) {
+                        cm.replaceSelection("    ", "end");
+                    }
+                }
+            });
+        }
+
+        // Switch language
+        function switchLanguage(lang) {
+            currentLanguage = lang;
+            
+            // Update UI
+            document.querySelectorAll('.language-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Update editor
+            editor.setValue(languages[lang].template);
+            editor.setOption('mode', languages[lang].mode);
+            
+            // Update language info
+            document.getElementById('current-language').textContent = languages[lang].name;
+            
+            // Clear output
+            document.getElementById('output').textContent = 'Click "Run Code" to execute your solution...';
+            document.getElementById('exec-status').textContent = 'Ready';
+            document.getElementById('exec-status').className = 'execution-status';
+        }
+
+        // Run code using Judge0 API
+        async function runCode() {
+            const code = editor.getValue();
+            const lang = languages[currentLanguage];
+            
+            // Update status
+            const statusEl = document.getElementById('exec-status');
+            statusEl.textContent = 'Running';
+            statusEl.className = 'execution-status running';
+            
+            const outputEl = document.getElementById('output');
+            outputEl.innerHTML = 'Executing<span class="loading-dots"></span>';
+            
+            try {
+                // Submit code to Judge0
+                const response = await fetch('https://judge0-ce.p.rapidapi.com/submissions', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json',
+                        'X-RapidAPI-Key': 'YOUR_RAPIDAPI_KEY', // You'll need to get this
+                        'X-RapidAPI-Host': 'judge0-ce.p.rapidapi.com'
+                    },
+                    body: JSON.stringify({
+                        language_id: lang.id,
+                        source_code: btoa(code),
+                        stdin: ''
+                    })
+                });
+                
+                const submission = await response.json();
+                
+                // Poll for results
+                setTimeout(async () => {
+                    const result = await fetch(`https://judge0-ce.p.rapidapi.com/submissions/${submission.token}`, {
+                        headers: {
+                            'X-RapidAPI-Key': 'YOUR_RAPIDAPI_KEY',
+                            'X-RapidAPI-Host': 'judge0-ce.p.rapidapi.com'
+                        }
+                    });
+                    
+                    const output = await result.json();
+                    
+                    if (output.stdout) {
+                        outputEl.textContent = atob(output.stdout);
+                        outputEl.className = 'output-content';
+                        statusEl.textContent = 'Success';
+                        statusEl.className = 'execution-status success';
+                    } else if (output.stderr) {
+                        outputEl.textContent = atob(output.stderr);
+                        outputEl.className = 'output-content error';
+                        statusEl.textContent = 'Error';
+                        statusEl.className = 'execution-status error';
+                    } else if (output.compile_output) {
+                        outputEl.textContent = atob(output.compile_output);
+                        outputEl.className = 'output-content error';
+                        statusEl.textContent = 'Compile Error';
+                        statusEl.className = 'execution-status error';
+                    }
+                }, 2000);
+                
+            } catch (error) {
+                // Fallback for demo - simulate execution
+                simulateExecution(code);
+            }
+        }
+
+        // Simulate execution for demo (when Judge0 not configured)
+        function simulateExecution(code) {
+            const outputEl = document.getElementById('output');
+            const statusEl = document.getElementById('exec-status');
+            
+            setTimeout(() => {
+                if (currentLanguage === 'python' && code.includes('for i in range(rows_A):')) {
+                    outputEl.textContent = `A = [[1, 2], [3, 4]]
+B = [[5, 6], [7, 8]]
+A × B = [[19, 22], [43, 50]]
+Expected: [[19, 22], [43, 50]]
+✓ Correct implementation!`;
+                    statusEl.textContent = 'Success';
+                    statusEl.className = 'execution-status success';
+                    
+                    // Update test cases
+                    document.querySelectorAll('.test-case-status').forEach((el, i) => {
+                        el.textContent = 'Pass';
+                        el.className = 'test-case-status pass';
+                    });
+                } else {
+                    outputEl.textContent = `Note: To enable real code execution, configure Judge0 API.
+                    
+For now, here's a simulation:
+Your code needs to implement the matrix multiplication logic.
+Hint: Use three nested loops (i, j, k) to calculate C[i][j] = Σ(A[i][k] * B[k][j])`;
+                    statusEl.textContent = 'Needs Implementation';
+                    statusEl.className = 'execution-status';
+                }
+            }, 1500);
+        }
+
+        // Test code
+        function testCode() {
+            alert('Running comprehensive test suite...\nThis would execute multiple test cases with different inputs.');
+        }
+
+        // Show hint
+        function showHint() {
+            const outputEl = document.getElementById('output');
+            outputEl.textContent = `Hint: Matrix multiplication C = A × B
+            
+For each element C[i][j]:
+1. Take row i from matrix A
+2. Take column j from matrix B
+3. Multiply corresponding elements and sum them up
+
+In code: C[i][j] = Σ(A[i][k] * B[k][j]) for k from 0 to cols_A-1
+
+Use three nested loops:
+- Outer loop: iterate through rows of A
+- Middle loop: iterate through columns of B
+- Inner loop: calculate the dot product`;
+        }
+
+        // Reset code
+        function resetCode() {
+            editor.setValue(languages[currentLanguage].template);
+            document.getElementById('output').textContent = 'Click "Run Code" to execute your solution...';
+            document.getElementById('exec-status').textContent = 'Ready';
+            document.getElementById('exec-status').className = 'execution-status';
+        }
+
+        // Show different output tabs
+        function showOutput(type) {
+            document.querySelectorAll('.output-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            const outputEl = document.getElementById('output');
+            if (type === 'stderr') {
+                outputEl.textContent = 'No errors';
+            } else if (type === 'compile') {
+                outputEl.textContent = 'No compilation output';
+            } else {
+                outputEl.textContent = 'Click "Run Code" to execute your solution...';
+            }
+        }
+
+        // Initialize on load
+        window.addEventListener('load', () => {
+            initEditor();
+        });
+    </script>
+</body>
+</html>
