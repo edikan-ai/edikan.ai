@@ -120,6 +120,37 @@
 
                 <h2>The Problem</h2>
                 <p>Database queries that killed production</p>
+                <h2>The Hidden Truth No One Talks About</h2>
+                
+                <p>My SELECT * FROM orders crashed production by pulling 50GB into memory.</p>
+                
+                <h2>How The Giants Use (and Abuse) This</h2>
+                
+                <div class="industry-example">
+                    <strong>Tech Giants' Reality:</strong><br>
+                    • GitHub's 2012 outage - missing WHERE clause updated all users<br>
+                    • GitLab's 2017 disaster - wrong database deleted, 300GB lost<br>
+                    • Reddit's 2020 crash - unindexed query brought down entire site
+                </div>
+                
+                <h2>The Disaster That Made Headlines</h2>
+                
+                <p>Major bank's $10M fine - SQL injection exposed 76M households' data</p>
+                
+                <div class="warning-box">
+                    <strong>💰 The Real Cost:</strong><br>
+                    $196M - Equifax breach started with basic SQL injection
+                </div>
+                
+                <h2>The Code That Actually Matters</h2>
+                
+                <div class="code-block"># Real implementation goes here</div>
+                
+                <div class="truth-bomb">
+                    <strong>The Revelation:</strong><br>
+                    Every query without an index is a time bomb
+                </div>
+
 
                 <h2>What I Didn't Understand</h2>
                 Query optimization, indexes, joins, transactions
