@@ -67,6 +67,31 @@
             padding: 1rem 0;
         }
         
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+        
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--dark);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+        
+        .github-link:hover {
+            background: #374151;
+            transform: translateY(-2px);
+        }
+        
         .logo {
             font-size: 1.5rem;
             font-weight: 700;
@@ -418,7 +443,15 @@
     <header>
         <nav class="container">
             <div class="logo">edikan<span class="ai">.ai</span></div>
-            <div>Multi-Language Industrial AI Platform</div>
+            <div class="nav-right">
+                <div>Multi-Language Industrial AI Platform</div>
+                <a href="https://github.com/edikan-ai/edikan-ai-docs" target="_blank" class="github-link">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                    </svg>
+                    View Code
+                </a>
+            </div>
         </nav>
     </header>
 
@@ -439,6 +472,41 @@
         </div>
     </section>
 
+    <!-- GitHub Resources Section -->
+    <section style="background: #F9FAFB; padding: 2rem 0; margin-bottom: 2rem;">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <h2 style="font-size: 2rem; margin-bottom: 0.5rem;">🚀 Open Source Code & Tutorials</h2>
+                <p style="color: #6B7280; font-size: 1.1rem;">Access our comprehensive collection of industrial AI examples</p>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+                <a href="https://github.com/edikan-ai/edikan-ai-docs/tree/main/examples" target="_blank" style="text-decoration: none;">
+                    <div style="background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); transition: all 0.3s; cursor: pointer; height: 100%;">
+                        <h3 style="color: var(--primary); margin-bottom: 0.5rem;">📝 Code Examples</h3>
+                        <p style="color: #6B7280; font-size: 0.95rem;">Production-ready examples in Python, Rust, Julia, C++, R, SQL, and MATLAB</p>
+                    </div>
+                </a>
+                <a href="https://github.com/edikan-ai/edikan-ai-docs/tree/main/tutorials" target="_blank" style="text-decoration: none;">
+                    <div style="background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); transition: all 0.3s; cursor: pointer; height: 100%;">
+                        <h3 style="color: var(--secondary); margin-bottom: 0.5rem;">📚 Tutorials</h3>
+                        <p style="color: #6B7280; font-size: 0.95rem;">Step-by-step guides from basics to advanced industrial applications</p>
+                    </div>
+                </a>
+                <a href="https://github.com/edikan-ai/edikan-ai-docs" target="_blank" style="text-decoration: none;">
+                    <div style="background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); transition: all 0.3s; cursor: pointer; height: 100%;">
+                        <h3 style="color: var(--success); margin-bottom: 0.5rem;">🔧 Get Started</h3>
+                        <p style="color: #6B7280; font-size: 0.95rem;">Clone the repository and start building industrial AI solutions today</p>
+                    </div>
+                </a>
+            </div>
+            <div style="text-align: center; margin-top: 2rem;">
+                <code style="background: var(--dark); color: white; padding: 0.75rem 1.5rem; border-radius: 8px; font-size: 1rem;">
+                    git clone https://github.com/edikan-ai/edikan-ai-docs.git
+                </code>
+            </div>
+        </div>
+    </section>
+
     <!-- Main Content -->
     <div class="container">
         <div class="main-content">
@@ -449,6 +517,24 @@
                     <li style="padding: 0.5rem 0;"><a href="#" style="color: var(--primary); text-decoration: none; font-weight: 600;">Month 00: The Confession</a></li>
                     <li style="padding: 0.5rem 0;"><a href="#" style="color: var(--dark); text-decoration: none;">Month 0: Competence</a></li>
                     <li style="padding: 0.5rem 0;"><a href="#" style="color: var(--dark); text-decoration: none;">Month 1: Mathematics</a></li>
+                </ul>
+                <hr style="margin: 1.5rem 0; border: none; border-top: 1px solid #E5E7EB;">
+                <h4 style="font-size: 0.9rem; color: #6B7280; margin-bottom: 1rem;">RESOURCES</h4>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="padding: 0.5rem 0;">
+                        <a href="https://github.com/edikan-ai/edikan-ai-docs" target="_blank" style="color: var(--dark); text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                            </svg>
+                            Code Examples
+                        </a>
+                    </li>
+                    <li style="padding: 0.5rem 0;">
+                        <a href="https://github.com/edikan-ai/edikan-ai-docs/tree/main/tutorials" target="_blank" style="color: var(--dark); text-decoration: none;">📚 Tutorials</a>
+                    </li>
+                    <li style="padding: 0.5rem 0;">
+                        <a href="https://github.com/edikan-ai/edikan-ai-docs/tree/main/datasets" target="_blank" style="color: var(--dark); text-decoration: none;">📊 Datasets</a>
+                    </li>
                 </ul>
             </aside>
 

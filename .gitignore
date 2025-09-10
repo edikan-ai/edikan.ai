@@ -1,0 +1,59 @@
+# Private/Sensitive Files
+*.pdf
+*.docx
+*Token*
+*token*
+*credentials*
+*secrets*
+
+# Personal/Strategic Documents
+*STRATEGY*
+*strategy*
+*CAREER*
+*CV*
+*Resume*
+*VENTURE*
+*EMPIRE*
+*MONETIZATION*
+*ENTREPRENEURIAL*
+
+# Private Data
+FORGE_Critical_Data/
+private/
+PRIVATE*/
+*nucor*
+*Nucor*
+
+# Blog and Site Architecture (keep private)
+BLOG-*.md
+blog-*.md
+*blog*content*
+website-architecture.md
+site-structure.md
+
+# Development files
+.DS_Store
+__pycache__/
+*.pyc
+.env
+.venv/
+venv/
+forge-env/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Temporary files
+*.log
+*.tmp
+temp/
+tmp/
+
+# Keep core site files private
+# (these are already in edikan-ai folder, just documenting)
+# index.html
+# interactive-index.html  
+# multi-language-platform.html
