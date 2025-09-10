@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog - edikan.ai | Industrial AI Insights</title>
+    <title>Blog - edikan.ai | Industrial AI Mastery Journey</title>
     <style>
         * {
             margin: 0;
@@ -19,269 +19,310 @@
             min-height: 100vh;
         }
         
-        /* Mobile-first container */
         .container {
             width: 100%;
-            max-width: 800px;
+            max-width: 1000px;
             margin: 0 auto;
-            padding: 15px;
+            padding: 20px;
         }
         
         header {
             background: white;
             border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-align: center;
         }
         
         h1 {
             color: #667eea;
             margin-bottom: 10px;
-            font-size: 1.8rem;
+            font-size: 2.5rem;
         }
         
         .tagline {
             color: #666;
+            font-size: 1.2rem;
             font-style: italic;
         }
         
-        nav {
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 1px solid #eee;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
+        .posts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
         }
         
-        nav a {
-            color: #667eea;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.95rem;
-        }
-        
-        nav a:hover {
-            text-decoration: underline;
-        }
-        
-        .blog-post {
+        .post-card {
             background: white;
             border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 15px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
+            padding: 25px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
         }
         
-        .blog-post:hover {
+        .post-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
         
-        .post-date {
-            color: #999;
-            font-size: 0.9em;
+        .post-number {
+            background: #667eea;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9rem;
             margin-bottom: 10px;
         }
         
         .post-title {
             color: #333;
-            margin-bottom: 15px;
-            font-size: 1.4rem;
-            line-height: 1.3;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            line-height: 1.4;
         }
         
-        .post-title a {
-            color: inherit;
-            text-decoration: none;
-        }
-        
-        .post-title a:hover {
-            color: #667eea;
-        }
-        
-        .post-excerpt {
-            color: #666;
-            margin-bottom: 15px;
-        }
-        
-        .read-more {
-            color: #667eea;
-            text-decoration: none;
-            font-weight: 500;
-        }
-        
-        .read-more:hover {
-            text-decoration: underline;
-        }
-        
-        .post-tags {
-            margin-top: 15px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-        
-        .tag {
-            display: inline-block;
-            background: #f0f0f0;
-            padding: 4px 12px;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            color: #666;
-            white-space: nowrap;
-        }
-        
-        footer {
-            text-align: center;
-            color: white;
-            margin-top: 30px;
-            padding: 20px 15px;
+        .post-date {
+            color: #999;
             font-size: 0.9rem;
         }
         
-        /* Tablet and Desktop Styles */
-        @media (min-width: 768px) {
-            .container {
-                padding: 20px;
-            }
-            
-            header {
-                padding: 30px;
-                margin-bottom: 30px;
-            }
-            
-            h1 {
-                font-size: 2.5rem;
-            }
-            
-            nav {
-                margin-top: 20px;
-                padding-top: 20px;
-            }
-            
-            nav a {
-                font-size: 1rem;
-            }
-            
-            .blog-post {
-                padding: 30px;
-                margin-bottom: 20px;
-            }
-            
-            .post-title {
-                font-size: 1.8rem;
-            }
-            
-            .tag {
-                font-size: 0.85rem;
-            }
-            
-            footer {
-                margin-top: 50px;
-                font-size: 1rem;
-            }
+        .section-header {
+            background: rgba(255,255,255,0.95);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 30px 0 20px;
+            text-align: center;
         }
         
-        /* Large screens */
-        @media (min-width: 1024px) {
-            .blog-post:hover {
-                transform: translateY(-5px);
-                box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-            }
+        .section-header h2 {
+            color: #667eea;
+            font-size: 1.8rem;
         }
         
-        /* Touch device adjustments */
-        @media (hover: none) {
-            .blog-post:hover {
-                transform: none;
-            }
+        .coming-soon {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        .nav-links {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .nav-links a {
+            color: #667eea;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: 600;
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <div class="nav-links">
+            <a href="/">← Back to edikan.ai</a>
+            <a href="https://github.com/edikan-ai/edikan-ai-docs" target="_blank">View Exercises</a>
+        </div>
+        
         <header>
-            <h1>edikan.ai Blog</h1>
-            <p class="tagline">Learning Industrial AI in Public - From Steel Mills to Neural Networks</p>
-            <nav>
-                <a href="index.html">Home</a>
-                <a href="blog.html">Blog</a>
-                <a href="index.html#learn">Learn</a>
-                <a href="about.html">About</a>
-            </nav>
+            <h1>The Industrial AI Journey</h1>
+            <p class="tagline">From confession to competence - A brutally honest path to mastery</p>
         </header>
+        
+        <div class="section-header">
+            <h2>Month 00: The Confession</h2>
+            <p>Admitting what I don't know</p>
+        </div>
+        
+        <div class="posts-grid">
 
-        <!-- Blog Post 3 - Most Recent -->
-        <article class="blog-post">
-            <div class="post-date">September 2, 2025</div>
-            <h2 class="post-title">
-                <a href="posts/2025-09-02-launching-edikan-ai.html">
-                    Launching edikan.ai: My Journey from Steel Mills to Software
-                </a>
-            </h2>
-            <p class="post-excerpt">
-                Today marks a significant milestone in my journey. After months of preparation through PROJECT FORGE, 
-                I'm launching edikan.ai - an interactive platform for learning industrial AI. This isn't just another 
-                tech blog; it's my commitment to learning in public and helping others transition into the incredible 
-                world of industrial AI...
-            </p>
-            <a href="posts/2025-09-02-launching-edikan-ai.html" class="read-more">Read more →</a>
-            <div class="post-tags">
-                <span class="tag">Launch</span>
-                <span class="tag">Industrial AI</span>
-                <span class="tag">PROJECT FORGE</span>
-            </div>
-        </article>
+            <a href="posts/2025-09-10-transpose-button-confession.html" class="post-card">
+                <div class="post-number">1</div>
+                <h3 class="post-title">The Transpose Button Confession: How I Faked My Way Through AI</h3>
+                <p class="post-date">September 10, 2025</p>
+            </a>
 
-        <!-- Blog Post 2 -->
-        <article class="blog-post">
-            <div class="post-date">August 28, 2025</div>
-            <h2 class="post-title">
-                <a href="posts/2025-08-28-prescriptive-analytics.html">
-                    Why Prescriptive Analytics is the Future of Manufacturing
-                </a>
-            </h2>
-            <p class="post-excerpt">
-                Everyone talks about predictive analytics - knowing what will happen. But in manufacturing, 
-                that's only half the battle. The real value comes from prescriptive analytics: knowing what to do about it. 
-                Let me share what I learned from analyzing 2 years of Nucor steel production data...
-            </p>
-            <a href="posts/2025-08-28-prescriptive-analytics.html" class="read-more">Read more →</a>
-            <div class="post-tags">
-                <span class="tag">Prescriptive Analytics</span>
-                <span class="tag">Manufacturing</span>
-                <span class="tag">Python</span>
-            </div>
-        </article>
+            <a href="posts/2025-09-11-variable-amnesia.html" class="post-card">
+                <div class="post-number">2</div>
+                <h3 class="post-title">Variable Amnesia: When I Couldn't Explain What x = 5 Actually Means</h3>
+                <p class="post-date">September 11, 2025</p>
+            </a>
 
-        <!-- Blog Post 1 - Oldest -->
-        <article class="blog-post">
-            <div class="post-date">August 20, 2025</div>
-            <h2 class="post-title">
-                <a href="posts/2025-08-20-confession.html">
-                    The Confession: I'm a Steel Production Supervisor Who Can't Code (Yet)
-                </a>
-            </h2>
-            <p class="post-excerpt">
-                It's time for a confession. I manage a multi-million dollar steel production facility, optimize complex 
-                manufacturing processes, and analyze mountains of data daily. But until recently, I couldn't write a 
-                single line of Python. This is my story of starting PROJECT FORGE...
-            </p>
-            <a href="posts/2025-08-20-confession.html" class="read-more">Read more →</a>
-            <div class="post-tags">
-                <span class="tag">Personal</span>
-                <span class="tag">Learning</span>
-                <span class="tag">Career Change</span>
-            </div>
-        </article>
+            <a href="posts/2025-09-12-loop-that-almost-got-me-fired.html" class="post-card">
+                <div class="post-number">3</div>
+                <h3 class="post-title">The Loop That Almost Got Me Fired</h3>
+                <p class="post-date">September 12, 2025</p>
+            </a>
 
-        <footer>
-            <p>&copy; 2025 edikan.ai - Building the Future of Industrial AI</p>
-            <p>One line of code at a time.</p>
-        </footer>
+            <a href="posts/2025-09-13-functions-more-than-copy-paste.html" class="post-card coming-soon">
+                <div class="post-number">4</div>
+                <h3 class="post-title">Functions: More Than Copy-Paste Blocks I Don't Understand</h3>
+                <p class="post-date">September 13, 2025</p>
+            </a>
+
+            <a href="posts/2025-09-14-data-structure-disaster.html" class="post-card coming-soon">
+                <div class="post-number">5</div>
+                <h3 class="post-title">My Data Structure Disaster at the Steel Mill</h3>
+                <p class="post-date">September 14, 2025</p>
+            </a>
+
+            <a href="posts/2025-09-15-debugging-diary.html" class="post-card coming-soon">
+                <div class="post-number">6</div>
+                <h3 class="post-title">The Debugging Diary: Learning to Fix What I Don't Understand</h3>
+                <p class="post-date">September 15, 2025</p>
+            </a>
+
+        </div>
+        
+        <div class="section-header">
+            <h2>Month 0: Building Competence</h2>
+            <p>Learning the fundamentals properly</p>
+        </div>
+        
+        <div class="posts-grid">
+
+            <a href="posts/2025-09-16-excel-to-python.html" class="post-card coming-soon">
+                <div class="post-number">7</div>
+                <h3 class="post-title">From Excel to Python: A Metallurgist's Painful Journey</h3>
+                <p class="post-date">September 16, 2025</p>
+            </a>
+
+            <a href="posts/2025-09-17-sql-nightmares.html" class="post-card coming-soon">
+                <div class="post-number">8</div>
+                <h3 class="post-title">SQL Nightmares: When SELECT * Crashed Production</h3>
+                <p class="post-date">September 17, 2025</p>
+            </a>
+
+            <a href="posts/2025-09-18-object-oriented-confusion.html" class="post-card coming-soon">
+                <div class="post-number">9</div>
+                <h3 class="post-title">Object-Oriented Confusion: Classes Aren't Just Fancy Dictionaries</h3>
+                <p class="post-date">September 18, 2025</p>
+            </a>
+
+            <a href="posts/2025-09-19-apis-actual-meaning.html" class="post-card coming-soon">
+                <div class="post-number">10</div>
+                <h3 class="post-title">The Day I Learned What APIs Actually Are</h3>
+                <p class="post-date">September 19, 2025</p>
+            </a>
+
+            <a href="posts/2025-09-20-git-saved-my-job.html" class="post-card coming-soon">
+                <div class="post-number">11</div>
+                <h3 class="post-title">Version Control Saved My Job: A Git Redemption Story</h3>
+                <p class="post-date">September 20, 2025</p>
+            </a>
+
+            <a href="posts/2025-09-21-testing-stopped-breaking-production.html" class="post-card coming-soon">
+                <div class="post-number">12</div>
+                <h3 class="post-title">Testing: How I Stopped Breaking Production Every Friday</h3>
+                <p class="post-date">September 21, 2025</p>
+            </a>
+
+        </div>
+        
+        <div class="section-header">
+            <h2>Month 1: Mathematical Foundations</h2>
+            <p>The language of industrial AI</p>
+        </div>
+        
+        <div class="posts-grid">
+
+            <a href="posts/2025-09-22-matrix-multiplication-clicked.html" class="post-card coming-soon">
+                <div class="post-number">13</div>
+                <h3 class="post-title">Matrix Multiplication: The Day It Finally Clicked</h3>
+                <p class="post-date">September 22, 2025</p>
+            </a>
+
+            <a href="posts/2025-09-23-eigenvalues-vibration-patterns.html" class="post-card coming-soon">
+                <div class="post-number">14</div>
+                <h3 class="post-title">Eigenvalues: Finding Hidden Patterns in Vibration Data</h3>
+                <p class="post-date">September 23, 2025</p>
+            </a>
+
+            <a href="posts/2025-09-24-pca-decoded.html" class="post-card coming-soon">
+                <div class="post-number">15</div>
+                <h3 class="post-title">PCA Decoded: Reducing 100 Sensors to 5 That Matter</h3>
+                <p class="post-date">September 24, 2025</p>
+            </a>
+
+            <a href="posts/2025-09-25-svd-missing-sensor-data.html" class="post-card coming-soon">
+                <div class="post-number">16</div>
+                <h3 class="post-title">The Magic of SVD in Missing Sensor Data</h3>
+                <p class="post-date">September 25, 2025</p>
+            </a>
+
+            <a href="posts/2025-09-26-probability-not-normal.html" class="post-card coming-soon">
+                <div class="post-number">17</div>
+                <h3 class="post-title">Probability: Why Your Mill Doesn't Follow Normal Distributions</h3>
+                <p class="post-date">September 26, 2025</p>
+            </a>
+
+            <a href="posts/2025-09-27-calculus-optimization.html" class="post-card coming-soon">
+                <div class="post-number">18</div>
+                <h3 class="post-title">Calculus for Optimization: Finding the Sweet Spot in Rolling Speed</h3>
+                <p class="post-date">September 27, 2025</p>
+            </a>
+
+        </div>
+        
+        <div class="section-header">
+            <h2>Month 2: Python Deep Dive</h2>
+            <p>From basics to industrial applications</p>
+        </div>
+        
+        <div class="posts-grid">
+
+            <a href="posts/2025-09-28-numpy-nightmares.html" class="post-card coming-soon">
+                <div class="post-number">19</div>
+                <h3 class="post-title">NumPy Nightmares: When Vectorization Goes Wrong</h3>
+                <p class="post-date">September 28, 2025</p>
+            </a>
+
+            <a href="posts/2025-09-29-pandas-proficiency.html" class="post-card coming-soon">
+                <div class="post-number">20</div>
+                <h3 class="post-title">Pandas Proficiency: From CSV Hell to Data Paradise</h3>
+                <p class="post-date">September 29, 2025</p>
+            </a>
+
+            <a href="posts/2025-09-30-bootstrap-saved-predictions.html" class="post-card coming-soon">
+                <div class="post-number">21</div>
+                <h3 class="post-title">The Bootstrap Method That Saved Our Quality Predictions</h3>
+                <p class="post-date">September 30, 2025</p>
+            </a>
+
+            <a href="posts/2025-10-01-convex-optimization.html" class="post-card coming-soon">
+                <div class="post-number">22</div>
+                <h3 class="post-title">Convex Optimization: Why Some Problems Are Actually Easy</h3>
+                <p class="post-date">October 1, 2025</p>
+            </a>
+
+            <a href="posts/2025-10-02-genetic-algorithms.html" class="post-card coming-soon">
+                <div class="post-number">23</div>
+                <h3 class="post-title">Genetic Algorithms: When Brute Force Is Actually Smart</h3>
+                <p class="post-date">October 2, 2025</p>
+            </a>
+
+            <a href="posts/2025-10-03-regularization-stopped-overfitting.html" class="post-card coming-soon">
+                <div class="post-number">24</div>
+                <h3 class="post-title">Regularization: How I Stopped Overfitting Everything</h3>
+                <p class="post-date">October 3, 2025</p>
+            </a>
+
+        </div>
     </div>
 </body>
 </html>

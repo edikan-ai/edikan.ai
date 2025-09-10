@@ -1,0 +1,252 @@
+#!/usr/bin/env python3
+"""
+Generate remaining blog posts for edikan.ai
+Creates posts 5-24 with appropriate content structure
+"""
+
+import os
+from datetime import datetime, timedelta
+
+def create_post_template(post_num, title, date, content_focus, exercises, key_concepts):
+    """Generate HTML template for a blog post"""
+    
+    template = f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{title} - edikan.ai</title>
+    <style>
+        * {{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }}
+        
+        body {{
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }}
+        
+        .container {{
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 15px;
+        }}
+        
+        article {{
+            background: white;
+            border-radius: 10px;
+            padding: 40px;
+            margin: 20px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }}
+        
+        .post-header {{
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }}
+        
+        h1 {{
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 2.2rem;
+            line-height: 1.3;
+        }}
+        
+        .post-meta {{
+            color: #999;
+            font-size: 0.9em;
+        }}
+        
+        .code-block {{
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+        }}
+        
+        .personal-story {{
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin: 25px 0;
+            font-style: italic;
+        }}
+        
+        .exercise-box {{
+            background: #f0f8ff;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 30px 0;
+        }}
+        
+        .truth-bomb {{
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 25px 0;
+        }}
+        
+        .next-post {{
+            background: #667eea;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 40px;
+            text-align: center;
+        }}
+        
+        .next-post a {{
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <article>
+            <div class="post-header">
+                <h1>{title}</h1>
+                <div class="post-meta">
+                    {date} • 12 min read • Part {post_num} of Industrial AI Mastery
+                </div>
+            </div>
+            
+            <div class="post-content">
+                <div class="personal-story">
+                    <strong>[YOUR PERSONAL STORY PLACEHOLDER]</strong>
+                    <p>Add your specific experience with {content_focus}. What went wrong? What was the impact? Be specific and vulnerable.</p>
+                </div>
+
+                <h2>The Problem</h2>
+                <p>{content_focus}</p>
+
+                <h2>What I Didn't Understand</h2>
+                {key_concepts}
+
+                <h2>Industrial Applications</h2>
+                <div class="code-block">
+# Industrial example code
+# [CODE PLACEHOLDER - Add specific industrial examples]
+                </div>
+
+                <h2>Exercise: Hands-On Practice</h2>
+                <div class="exercise-box">
+                    <h3>{exercises['title']}</h3>
+                    <p>{exercises['description']}</p>
+                    <div class="code-block">
+{exercises['code']}
+                    </div>
+                </div>
+
+                <h2>Key Takeaways</h2>
+                <div class="truth-bomb">
+                    <strong>What I Learned:</strong><br>
+                    {key_concepts}
+                </div>
+
+                <div class="personal-story">
+                    <strong>[YOUR LEARNING MOMENT PLACEHOLDER]</strong>
+                    <p>How did you finally understand this concept? What made it click?</p>
+                </div>
+            </div>
+        </article>
+    </div>
+</body>
+</html>"""
+    
+    return template
+
+# Define all remaining posts (5-24)
+remaining_posts = [
+    # Month 00 continues
+    {
+        'num': 5,
+        'filename': '2025-09-14-data-structure-disaster.html',
+        'title': 'My Data Structure Disaster at the Steel Mill',
+        'date': 'September 14, 2025',
+        'focus': 'Using the wrong data structure for industrial data',
+        'concepts': 'Lists vs sets vs dictionaries, memory efficiency, access patterns',
+        'exercise': {
+            'title': 'Optimize Sensor Data Storage',
+            'description': 'Choose the right data structure for different sensor scenarios',
+            'code': '# Store 1M temperature readings efficiently\n# Quick lookups by timestamp\n# Remove duplicates automatically'
+        }
+    },
+    {
+        'num': 6,
+        'filename': '2025-09-15-debugging-diary.html',
+        'title': 'The Debugging Diary: Learning to Fix What I Don\'t Understand',
+        'date': 'September 15, 2025',
+        'focus': 'Debugging without understanding the code',
+        'concepts': 'Print debugging, using debuggers, reading stack traces',
+        'exercise': {
+            'title': 'Debug the Sensor System',
+            'description': 'Find and fix bugs in a temperature monitoring system',
+            'code': '# System crashes after 1000 readings\n# Memory usage keeps growing\n# Some readings are lost'
+        }
+    },
+    
+    # Month 0: Building Competence
+    {
+        'num': 7,
+        'filename': '2025-09-16-excel-to-python.html',
+        'title': 'From Excel to Python: A Metallurgist\'s Painful Journey',
+        'date': 'September 16, 2025',
+        'focus': 'Transitioning from Excel to programming',
+        'concepts': 'Dataframes vs spreadsheets, automation benefits, scripting',
+        'exercise': {
+            'title': 'Convert Excel Process to Python',
+            'description': 'Automate a manual Excel workflow',
+            'code': '# Read production data\n# Calculate rolling averages\n# Generate quality reports'
+        }
+    },
+    {
+        'num': 8,
+        'filename': '2025-09-17-sql-nightmares.html',
+        'title': 'SQL Nightmares: When SELECT * Crashed Production',
+        'date': 'September 17, 2025',
+        'focus': 'Database queries that killed production',
+        'concepts': 'Query optimization, indexes, joins, transactions',
+        'exercise': {
+            'title': 'SQL for Industrial Data',
+            'description': 'Write efficient queries for sensor databases',
+            'code': '-- Get hourly averages\n-- Find anomalies\n-- Join sensor and maintenance data'
+        }
+    },
+    # Continue for all 24 posts...
+]
+
+# Create the posts
+posts_dir = '/Users/edikan/Documents/PROJECT FORGE/edikan-ai/posts'
+
+for post in remaining_posts[:6]:  # Create first 6 for now
+    html_content = create_post_template(
+        post['num'],
+        post['title'],
+        post['date'],
+        post['focus'],
+        post['exercise'],
+        post['concepts']
+    )
+    
+    filepath = os.path.join(posts_dir, post['filename'])
+    with open(filepath, 'w') as f:
+        f.write(html_content)
+    
+    print(f"Created: {post['filename']}")
+
+print(f"\nCreated {len(remaining_posts[:6])} posts")
+print("Remember to add your personal stories to each post!")
