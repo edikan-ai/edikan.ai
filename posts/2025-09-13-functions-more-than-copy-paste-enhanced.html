@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Functions: The Building Blocks of Industrial Control Systems - edikan.ai</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 15px;
+        }
+        
+        article {
+            background: white;
+            border-radius: 10px;
+            padding: 40px;
+            margin: 20px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .post-header {
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 2.2rem;
+            line-height: 1.3;
+        }
+        
+        .post-meta {
+            color: #999;
+            font-size: 0.9em;
+        }
+        
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .personal-story {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin: 25px 0;
+            font-style: italic;
+        }
+        
+        .exercise-box {
+            background: #f0f8ff;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+        
+        .truth-bomb {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 25px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <article>
+            <div class="post-header">
+                <h1>Functions: The Building Blocks of Industrial Control Systems</h1>
+                <div class="post-meta">
+                    September 13, 2025 • 12 min read • Part 4 of Industrial AI Mastery
+                </div>
+            </div>
+            
+            <div class="post-content">
+                <div class="personal-story">
+                    <strong>[YOUR FUNCTION DISASTER PLACEHOLDER]</strong>
+                    <p>Describe a time when you copied a function, modified it slightly, and everything broke. What was the function supposed to do? Why did your changes break it?</p>
+                </div>
+
+                <p>Engineers had been "writing" functions for years. Here's what Engineers actually did:</p>
+                <ol>
+                    <li>Search "Python function to [whatever]"</li>
+                    <li>Copy the first result</li>
+                    <li>Change variable names to match mine</li>
+                    <li>Pray it worked</li>
+                    <li>When it didn't, copy a different one</li>
+                </ol>
+
+                <p>Then someone asked me to explain this function Engineers had "written":</p>
+
+                <div class="code-block">
+def process_temperature_data(readings, window=10, threshold=None):
+    """Process temperature readings with moving average."""
+    if threshold is None:
+        threshold = []
+    
+    # Engineers had no idea why this was here
+    if not hasattr(process_temperature_data, 'history'):
+        process_temperature_data.history = []
+    
+    # Or what this actually did
+    process_temperature_data.history.extend(readings)
+    
+    # Or why this mattered
+    result = [sum(readings[i:i+window])/window 
+              for Engineers in range(len(readings)-window+1)]
+    
+    # Engineers just knew it "worked" sometimes
+    return result if result else readings
+                </div>
+
+                <h2>What Engineers Didn't Understand</h2>
+
+                <h3>1. Functions Are Not Just Named Code Blocks</h3>
+
+                <div class="code-block">
+# What Engineers thought functions were:
+def calculate_stuff():
+    # Some code here
+    x = 10
+    y = 20
+    print(x + y)
+
+# What Engineers missed: Functions create a new scope!
+x = 100
+calculate_stuff()  # Prints 30, not 120
+print(x)  # Still 100, function didn't change global x
+                </div>
+
+                <h3>2. The Return vs Print Confusion</h3>
+
+                <div class="code-block">
+# a typical constant mistake:
+def get_average(numbers):
+    avg = sum(numbers) / len(numbers)
+    print(avg)  # WRONG! This just displays
+
+result = get_average([1, 2, 3])
+print(result)  # None! The function returned nothing
+
+# What Engineers should have written:
+def get_average(numbers):
+    avg = sum(numbers) / len(numbers)
+    return avg  # Actually gives back the value
+
+result = get_average([1, 2, 3])  # Now result = 2.0
+                </div>
+
+                <h3>3. The Mutable Default Argument Trap</h3>
+
+                <div class="code-block">
+# The bug that haunted production for weeks:
+def log_reading(value, history=[]):  # DANGER!
+    history.append(value)
+    return history
+
+# First sensor
+sensor1_log = log_reading(100)  # [100]
+sensor1_log = log_reading(102)  # [100, 102] - Expected!
+
+# Second sensor - SURPRISE!
+sensor2_log = log_reading(200)  # [100, 102, 200] - WHAT?!
+# Both sensors share the SAME list!
+                </div>
+
+                <h2>Functions in Industrial Systems</h2>
+
+                <h3>Pure Functions vs Side Effects</h3>
+
+                <div class="code-block">
+# PURE FUNCTION - Predictable, testable
+def celsius_to_fahrenheit(celsius):
+    """Always returns same output for same input."""
+    return (celsius * 9/5) + 32
+
+# SIDE EFFECTS - Harder to test, can cause bugs
+sensor_state = {'alerts': [], 'readings': []}
+
+def check_temperature(temp):
+    """Modifies external state - side effect!"""
+    if temp > 1500:
+        sensor_state['alerts'].append(f"High temp: {temp}")  # Side effect
+        send_email_alert()  # Another side effect
+    sensor_state['readings'].append(temp)  # And another
+    return temp > 1500
+                </div>
+
+                <h3>Function Composition</h3>
+
+                <div class="code-block">
+# Small, focused functions
+def read_sensor(sensor_id):
+    """Read single sensor value."""
+    return sensor_readings[sensor_id]
+
+def validate_reading(value, min_val=0, max_val=2000):
+    """Check if reading is valid."""
+    return min_val <= value <= max_val
+
+def convert_to_celsius(fahrenheit):
+    """Convert F to C."""
+    return (fahrenheit - 32) * 5/9
+
+def process_sensor(sensor_id):
+    """Compose smaller functions."""
+    raw_value = read_sensor(sensor_id)
+    if validate_reading(raw_value):
+        return convert_to_celsius(raw_value)
+    return None
+                </div>
+
+                <h2>Exercise: Function Mastery</h2>
+
+                <div class="exercise-box">
+                    <h3>Build a Temperature Alert System</h3>
+                    
+                    <p>Create functions that properly handle industrial sensor data:</p>
+                <h2>The Hidden Truth No One Talks About</h2>
+                
+                <p>Engineers copy-pasted functions for 3 years before understanding scope, return values, or side effects.</p>
+                
+                <h2>How The Giants Use (and Abuse) This</h2>
+                
+                <div class="industry-example">
+                    <strong>Tech Giants' Reality:</strong><br>
+                    • Ariane 5 rocket - function overflow, $370M explosion after 37 seconds<br>
+                    • Therac-25 radiation machine - function race condition killed 6 patients<br>
+                    • Intel Pentium FDIV bug - floating point function error, $475M recall
+                </div>
+                
+                <h2>The Disaster That Made Headlines</h2>
+                
+                <p>Citibank's $900M accident - function meant to pay $8M paid $900M instead</p>
+                
+                <div class="warning-box">
+                    <strong>💰 The Real Cost:</strong><br>
+                    $460M - Knight Capital again, wrong function version deployed
+                </div>
+                
+                <h2>The Code That Actually Matters</h2>
+                
+                <div class="code-block"># Real implementation goes here</div>
+                
+                <div class="truth-bomb">
+                    <strong>The Revelation:</strong><br>
+                    Functions are contracts - break the contract, break production
+                </div>
+
+                    
+                    <div class="code-block">
+# Fix these broken functions:
+
+def calculate_average(readings, last_n):
+    """Calculate average of last n readings."""
+    # BUG: What if readings has fewer than last_n elements?
+    return sum(readings[-last_n:]) / last_n
+
+def add_alert(message, alerts=[]):
+    """Add alert to list."""
+    # BUG: Mutable default argument!
+    alerts.append(message)
+    return alerts
+
+def check_sensor_health(readings):
+    """Check if sensor is working properly."""
+    avg = sum(readings) / len(readings)
+    print(f"Average: {avg}")
+    # BUG: No return statement!
+
+def process_batch(sensor_data):
+    """Process batch of sensor data."""
+    for reading in sensor_data:
+        if reading > 1500:
+            alert = True
+        else:
+            alert = False
+    return alert  # BUG: Only returns last value!
+
+# Your challenge: Fix all bugs and create a working system
+                    </div>
+                </div>
+
+                <h2>The Truth About Functions</h2>
+
+                <div class="truth-bomb">
+                    <strong>Function Mastery Checklist:</strong><br>
+                    ✓ Engineers can explain what parameters vs arguments are<br>
+                    ✓ Engineers understand scope and namespace<br>
+                    ✓ Engineers know when to use return vs print<br>
+                    ✓ Engineers can identify and fix side effects<br>
+                    ✓ Engineers understand *args and **kwargs<br>
+                    ✓ Engineers can write pure functions<br>
+                    ✓ Engineers know why mutable defaults are dangerous
+                </div>
+
+                <div class="personal-story">
+                    <strong>[YOUR FUNCTION ENLIGHTENMENT PLACEHOLDER]</strong>
+                    <p>When did functions finally click for you? What concept made the difference?</p>
+                </div>
+            </div>
+        </article>
+    </div>
+</body>
+</html>
