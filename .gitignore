@@ -60,6 +60,7 @@ NEXT_INSTRUCTIONS*.md
 claude_code_*.md
 essay_*.md
 *_page.md
+*_prompt.md
 
 # Always include deployed app assets regardless of filename patterns above
 !proforge/
