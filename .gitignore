@@ -52,6 +52,19 @@ forge-env/
 temp/
 tmp/
 
+# Internal drafting/input documents (site copy, integration prompts, essay sources)
+# These are inputs Claude Code reads to build pages; they never enter the public repo.
+*_copy.md
+[0-9][0-9]_*.md
+NEXT_INSTRUCTIONS*.md
+claude_code_*.md
+essay_*.md
+*_page.md
+
+# Always include deployed app assets regardless of filename patterns above
+!proforge/
+!proforge/**
+
 # Keep core site files private
 # (these are already in edikan-ai folder, just documenting)
 # index.html
