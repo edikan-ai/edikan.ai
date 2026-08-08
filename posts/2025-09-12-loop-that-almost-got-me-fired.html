@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Loop That Almost Got Me Fired - edikan.ai</title>
+    <title>Loops in Production: Iteration That Cannot Run Away - edikan.ai</title>
     <style>
         * {
             margin: 0;
@@ -149,70 +149,66 @@
     <div class="container">
         <article>
             <div class="post-header">
-                <h1>The Loop That Almost Got Me Fired</h1>
+                <h1>Loops in Production: Iteration That Cannot Run Away</h1>
                 <div class="post-meta">
-                    September 12, 2025 • 13 min read • Part 3 of Industrial AI Mastery
+                    Phase 1: Foundations • Published September 12, 2025 • Revised August 8, 2026
                 </div>
             </div>
             
             <div class="post-content">
                 <div class="warning-box">
-                    <strong>⚠️ Production Incident Report</strong><br>
-                    Date: [YOUR DATE PLACEHOLDER]<br>
-                    Impact: Production line stopped for [TIME]<br>
-                    Root Cause: Infinite loop in temperature monitoring system<br>
-                    Cost: [YOUR COST PLACEHOLDER]
+                    <strong>⚠️ A Classic Industrial Incident Pattern</strong><br>
+                    A monitoring loop is deployed to watch furnace temperature. The loop's exit condition 
+                    depends on a sensor flag that, under a failure mode nobody tested, never changes. The 
+                    loop runs forever, its collection list grows without bound, memory is exhausted, and 
+                    the monitoring system — the thing meant to protect the equipment — is what crashes. 
+                    This module teaches you to write loops where that cannot happen.
                 </div>
 
-                <div class="personal-story">
-                    <strong>[YOUR INFINITE LOOP STORY PLACEHOLDER]</strong>
-                    <p>Describe the actual incident. What system were you working on? What was the loop supposed to do? How did it bring down production? What was the conversation with your manager like?</p>
-                </div>
-
-                <p>I thought I understood loops. I'd written hundreds of them:</p>
+                <p>Most programmers believe they understand loops because they have written hundreds of them:</p>
 
                 <div class="code-block">
 for i in range(10):
     print(i)
 
-# I could write this in my sleep
-# But I had no idea what was actually happening
+# Anyone can write this
+# Understanding what can go wrong is a different skill
                 </div>
 
-                <p>Then I deployed this to production:</p>
+                <p>Then code like this reaches production:</p>
 
                 <div class="code-block">
 # The killer code (simplified)
 def monitor_furnace(sensor):
     temperatures = []
-    while sensor.is_active:  # I didn't realize this never became False
+    while sensor.is_active:  # What if this never becomes False?
         temp = sensor.read_temperature()
-        temperatures.append(temp)  # Memory leak!
+        temperatures.append(temp)  # Unbounded growth - memory leak!
         if temp > 1600:
             alert_operator()
     return temperatures
 
-# This ran forever, consuming all memory, crashing the monitoring system
+# This runs forever, consumes all memory, and crashes the monitoring system
                 </div>
 
-                <h2>What I Didn't Understand About Loops</h2>
+                <h2>Three Loop Misconceptions That Reach Production</h2>
 
                 <h3>1. The While Loop Trap</h3>
 
-                <p>I thought while loops were just "keep doing until false". I didn't understand:</p>
+                <p>A while loop is not just "keep doing until false." The dangerous question is: what guarantees the condition ever becomes false?</p>
 
                 <div class="code-block">
-# What I wrote (WRONG):
+# WRONG - nothing changes i:
 i = 0
 while i < 10:
     process_item(i)
     # Forgot to increment i - infinite loop!
 
-# The sensor nightmare (WRONG):
+# WRONG - trusts external hardware:
 while sensor.temperature < 1500:
-    wait()  # What if sensor breaks and always reads 0?
+    wait()  # What if the sensor breaks and always reads 0?
 
-# What I should have written (RIGHT):
+# RIGHT - bounded, with a failure path:
 max_iterations = 1000
 counter = 0
 while sensor.temperature < 1500 and counter < max_iterations:
@@ -224,7 +220,7 @@ while sensor.temperature < 1500 and counter < max_iterations:
 
                 <h3>2. The For Loop Misconception</h3>
 
-                <p>I thought for loops were safe. They're not:</p>
+                <p>For loops feel safe. They're not — especially when the collection being iterated is also being modified:</p>
 
                 <div class="code-block">
 # The memory disaster:
@@ -243,8 +239,8 @@ for i in range(len(readings)):
                 <h3>3. The Range() Mystery</h3>
 
                 <div class="code-block">
-# What I thought range() was:
-range(5)  # I thought: [0, 1, 2, 3, 4]
+# What beginners think range() is:
+range(5)  # A list: [0, 1, 2, 3, 4]?
 
 # What it actually is:
 range(5)  # A range object, not a list! Generates values on demand
@@ -319,12 +315,12 @@ while True:
                 <h3>Pattern 3: The Enumerate Enlightenment</h3>
 
                 <div class="code-block">
-# What I used to write:
+# The index-juggling habit:
 temperatures = [1500, 1502, 1498, 1505]
 for i in range(len(temperatures)):
     print(f"Reading {i}: {temperatures[i]}°C")
 
-# What I should write:
+# The idiomatic version:
 for i, temp in enumerate(temperatures):
     print(f"Reading {i}: {temp}°C")
 
@@ -495,7 +491,7 @@ class ProductionMonitor:
                     </div>
                 </div>
 
-                <h2>Lessons Learned the Hard Way</h2>
+                <h2>Rules for Production Loops</h2>
 
                 <ol>
                     <li><strong>Always have an exit strategy</strong> - Every loop needs a guaranteed way out</li>
@@ -506,18 +502,13 @@ class ProductionMonitor:
                     <li><strong>Test edge cases</strong> - Empty lists, single elements, maximum sizes</li>
                 </ol>
 
-                <div class="personal-story">
-                    <strong>[YOUR RECOVERY PLACEHOLDER]</strong>
-                    <p>How did you fix the production issue? What did you learn? What do you do differently now?</p>
-                </div>
-
                 <div class="truth-bomb">
-                    <strong>The Truth:</strong> Most production failures aren't from complex algorithms – they're from simple loops that weren't thought through. A junior dev who writes safe loops is more valuable than a senior who writes clever but dangerous ones.
+                    <strong>The Truth:</strong> Most production failures aren't from complex algorithms – they're from simple loops that weren't thought through. An engineer who writes safe loops is more valuable than one who writes clever but dangerous ones.
                 </div>
 
                 <div class="next-post">
-                    <p>Ready to understand functions as more than copy-paste blocks?</p>
-                    <a href="2025-09-13-functions-more-than-copy-paste.html">Next: Functions - More Than Copy-Paste Blocks →</a>
+                    <p>Loops decide how often code runs. Functions decide how it's organized — and misused, they fail in subtler ways.</p>
+                    <a href="2025-09-13-functions-more-than-copy-paste.html">Next: Functions — Contracts, Scope, and Side Effects →</a>
                 </div>
             </div>
         </article>

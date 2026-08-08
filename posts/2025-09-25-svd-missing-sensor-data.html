@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Magic of SVD in Missing Sensor Data - edikan.ai</title>
+    <title>Recovering Missing Sensor Data with SVD - edikan.ai</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.8; color: #333; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; }
@@ -28,40 +28,31 @@
     <div class="container">
         <article>
             <div class="post-header">
-                <h1>The Magic of SVD in Missing Sensor Data</h1>
+                <h1>Recovering Missing Sensor Data with SVD</h1>
                 <div class="post-meta">
-                    September 25, 2025 • 18 min read • Part 16 of Industrial AI Mastery
+                    Phase 3: Mathematical Foundations • Published September 25, 2025 • Revised August 8, 2026
                 </div>
             </div>
             
             <div class="post-content">
-                <div class="personal-story">
-                    <strong>[YOUR SVD DISCOVERY STORY]</strong>
-                    <p>Add your moment when you first encountered missing sensor data. What system was it? How much data was missing? What was at stake?</p>
-                </div>
+                <p>Picture this: a steel mill instrumented with 200 temperature sensors, and 30% of them fail during a critical production run. Stopping production is enormously expensive. Ignoring the gaps risks equipment damage. And traditional interpolation won't work, because the sensors are interconnected in ways a simple average cannot capture.</p>
 
-                <p>Picture this: You're monitoring a steel mill with 200 temperature sensors. Suddenly, 30% of them fail during a critical production run. You can't stop production – that's $50,000 per hour. You can't ignore the gaps – that risks equipment damage. Traditional interpolation won't work because the sensors are interconnected in complex ways.</p>
+                <p>The mathematics that solves this problem is the same mathematics behind modern recommender systems — predicting the movie ratings a user never entered, from the structure of the ratings they did. It's called Singular Value Decomposition (SVD), and it is one of the most practically useful tools in the industrial linear algebra toolkit.</p>
 
-                <p>This is where I discovered the same mathematics that Netflix uses to recommend movies when you've only watched a few, that Google uses to fill in missing entries in massive datasets, and that Spotify uses to suggest songs you'll love. It's called Singular Value Decomposition (SVD), and it saved my production line.</p>
+                <h2>The Netflix Connection</h2>
 
-                <h2>The Netflix Connection That Changed Everything</h2>
+                <p>In 2006, Netflix offered a $1 million prize to anyone who could improve its recommendation system by 10%. Matrix factorization methods in the SVD family were at the heart of the winning approaches. The insight transfers directly to plant data:</p>
 
-                <p>In 2006, Netflix offered a $1 million prize to anyone who could improve their recommendation system by 10%. The winning solution? SVD-based matrix factorization. Here's the mind-blowing part: the same math that predicts what movies you'll like can predict what your broken sensors should be reading.</p>
-
-                <p>Think about it:</p>
                 <ul>
-                    <li><strong>Netflix:</strong> Users × Movies matrix with 99% missing ratings</li>
-                    <li><strong>Our mill:</strong> Time × Sensors matrix with 30% missing readings</li>
-                    <li><strong>The pattern:</strong> Both have hidden relationships we can exploit</li>
+                    <li><strong>Netflix:</strong> Users × Movies matrix with most ratings missing</li>
+                    <li><strong>A mill:</strong> Time × Sensors matrix with 30% of readings missing</li>
+                    <li><strong>The pattern:</strong> Both matrices have low-rank hidden structure we can exploit</li>
                 </ul>
 
-                <div class="industry-example">
-                    <strong>Real-World Impact:</strong><br>
-                    • Netflix: 75% of views come from recommendations (SVD-powered)<br>
-                    • Amazon: 35% of revenue from recommendation engine<br>
-                    • Spotify: 31% of plays from Discover Weekly (uses SVD)<br>
-                    • Our mill: 94% sensor recovery accuracy, $2M saved annually
-                </div>
+                <p style="font-size: 0.85em; color: #666;">
+                    Source: Y. Koren, R. Bell, and C. Volinsky, "Matrix Factorization Techniques for 
+                    Recommender Systems," <em>IEEE Computer</em>, vol. 42, no. 8, 2009.
+                </p>
 
                 <h2>What SVD Actually Does (The Intuition)</h2>
 
@@ -83,7 +74,7 @@ Time5   1523     ????     1522     1525     ????
                     <li><strong>Factor 3:</strong> Airflow patterns</li>
                 </ul>
 
-                <p>Just like Netflix discovers that all movies can be described by hidden factors like "action-ness", "romance level", or "quirkiness", SVD finds that your sensors follow hidden patterns.</p>
+                <p>Just as a recommender system discovers that movies can be described by hidden factors like "action-ness" or "quirkiness", SVD finds that your sensors follow hidden physical patterns.</p>
 
                 <h2>The Mathematics (Made Digestible)</h2>
 
@@ -123,8 +114,7 @@ import pandas as pd
 
 class SensorRecovery:
     """
-    Industrial sensor data recovery using SVD.
-    Used in production at 3 steel mills since 2023.
+    Industrial sensor data recovery using iterative SVD imputation.
     """
     
     def __init__(self, n_components=10, regularization=0.01):
@@ -156,7 +146,7 @@ class SensorRecovery:
         for j in range(X.shape[1]):
             X[missing_mask[:, j], j] = self.sensor_means[j]
         
-        # Iterative SVD refinement (like Netflix Prize winners did)
+        # Iterative SVD refinement (the approach behind Netflix Prize methods)
         prev_rmse = float('inf')
         
         for iteration in range(max_iterations):
@@ -214,10 +204,10 @@ class SensorRecovery:
         else:
             return "Mixed sensor pattern - investigate manually"
 
-# Real production example
+# Worked example on realistic simulated data
 def production_example():
     """
-    Actual case from steel mill sensor failure incident.
+    Simulated furnace sensor-failure scenario.
     """
     # Generate realistic sensor data with failures
     np.random.seed(42)
@@ -245,10 +235,9 @@ def production_example():
     recovery = SensorRecovery(n_components=3)
     recovered_data = recovery.fit_transform(sensor_data_with_failures)
     
-    # Calculate accuracy
-    mae = np.mean(np.abs(sensor_data[failure_mask] - recovered_data[failure_mask]))
-    print(f"Mean Absolute Error: {mae:.2f}°C")
-    print(f"Accuracy: {100 - (mae/1500)*100:.1f}%")
+    # Measure recovery error against the known ground truth
+    mae = np.mean(np.abs(sensor_data.values[failure_mask] - recovered_data.values[failure_mask]))
+    print(f"Mean Absolute Error on recovered values: {mae:.2f}°C")
     
     # Explain what SVD found
     explanations = recovery.explain_factors(sensor_data.columns.tolist())
@@ -260,7 +249,7 @@ def production_example():
 production_example()
                 </div>
 
-                <h2>Why This Works When Others Methods Fail</h2>
+                <h2>Why This Works When Other Methods Fail</h2>
 
                 <h3>Traditional Interpolation: Local and Limited</h3>
                 <p>Linear interpolation only looks at neighboring points. If sensor 3 fails, it averages sensors 2 and 4. But what if sensors 2 and 4 measure different zones?</p>
@@ -279,28 +268,21 @@ production_example()
                 <h2>Industrial Applications Beyond Sensors</h2>
 
                 <div class="industry-example">
-                    <strong>Where SVD is Used in Industry:</strong><br>
+                    <strong>Where the same low-rank machinery is used:</strong><br>
                     <br>
                     <strong>Manufacturing:</strong><br>
                     • Quality prediction with partial measurements<br>
-                    • Supply chain optimization with incomplete data<br>
+                    • Supply chain planning with incomplete data<br>
                     • Predictive maintenance from sparse sensor networks<br>
                     <br>
-                    <strong>Tech Companies:</strong><br>
-                    • Google: PageRank algorithm (uses SVD variant)<br>
-                    • Facebook: Friend suggestions and content ranking<br>
-                    • Amazon: Product recommendations and inventory<br>
-                    • Uber: Demand prediction with missing geographic data<br>
+                    <strong>Consumer technology:</strong><br>
+                    • Recommender systems (the Netflix Prize lineage cited above)<br>
                     <br>
                     <strong>Finance:</strong><br>
-                    • Risk assessment with incomplete market data<br>
-                    • Portfolio optimization<br>
-                    • Fraud detection patterns<br>
+                    • Factor models for risk with incomplete market data<br>
                     <br>
                     <strong>Healthcare:</strong><br>
-                    • Drug discovery (predicting molecule interactions)<br>
-                    • Patient outcome prediction with missing tests<br>
-                    • Image reconstruction in MRI/CT scans
+                    • Image reconstruction in compressed-sensing MRI
                 </div>
 
                 <h2>The Exercise: Build Your Own Sensor Recovery System</h2>
@@ -378,83 +360,54 @@ class OnlineSVD:
                     </ul>
                 </div>
 
-                <h2>The Breakthrough Moment</h2>
+                <h2>The Factors Have Physical Meaning</h2>
 
-                <div class="personal-story">
-                    <strong>[YOUR BREAKTHROUGH PLACEHOLDER]</strong>
-                    <p>When did SVD click for you? Was it when you saw the Netflix connection? When you successfully recovered sensor data? When you realized the hidden factors had physical meaning?</p>
-                </div>
-
-                <p>For me, the breakthrough came when I realized that SVD wasn't just math – it was discovering the hidden physics of our system. Those abstract "factors" were actually:</p>
+                <p>The most important thing to understand about SVD on plant data is that the abstract "factors" usually correspond to real physics. In a typical furnace dataset, the recovered components look like:</p>
                 <ul>
-                    <li>Factor 1: The main heating cycle (explained 70% of variance)</li>
-                    <li>Factor 2: The cooling gradient from inlet to outlet (15%)</li>
-                    <li>Factor 3: Vibrations from the rolling mill next door (5%)</li>
+                    <li>Factor 1: The main heating cycle (dominating the variance)</li>
+                    <li>Factor 2: The cooling gradient from inlet to outlet</li>
+                    <li>Factor 3: A smaller disturbance — often traceable to nearby equipment</li>
                 </ul>
 
-                <p>Suddenly, we weren't just filling in missing numbers. We were understanding our furnace better than ever before.</p>
+                <p>When you reach that point, you are not just filling in missing numbers. You are understanding the system better than complete data alone would have taught you.</p>
 
                 <h2>Common SVD Pitfalls in Production</h2>
 
                 <div class="warning-box">
-                    <strong>Mistakes I Made So You Don't Have To:</strong><br><br>
+                    <strong>Mistakes to avoid:</strong><br><br>
                     
                     <strong>1. Using too many components:</strong><br>
-                    More isn't better. I used 50 components for 100 sensors and overfit badly. Use cross-validation to find the sweet spot (usually 5-15).<br><br>
+                    More isn't better — with too many components the model overfits the noise. Use cross-validation to find the sweet spot (often 5–15 for a ~100-sensor network).<br><br>
                     
                     <strong>2. Not centering data:</strong><br>
-                    Always subtract the mean! SVD assumes centered data. Forgot this once and predicted negative temperatures.<br><br>
+                    Always subtract the mean. SVD assumes centered data; skip this and the reconstruction can produce physically impossible values.<br><br>
                     
                     <strong>3. Ignoring the physics:</strong><br>
-                    SVD said two sensors were highly correlated. Turns out one was in Celsius, one in Fahrenheit. Always sanity-check!<br><br>
+                    If SVD says two sensors are perfectly correlated, check the units before celebrating — one may be in Celsius and the other in Fahrenheit. Always sanity-check against plant knowledge.<br><br>
                     
                     <strong>4. Trusting SVD with too much missing data:</strong><br>
-                    Beyond 60% missing, SVD becomes creative fiction. Have a fallback plan.<br><br>
+                    Beyond roughly 60% missing, reconstruction quality degrades sharply. Have a fallback plan.<br><br>
                     
                     <strong>5. Not updating the model:</strong><br>
-                    Furnace characteristics change over time (wear, maintenance). Retrain weekly!
-                </div>
-
-                <h2>The Business Impact</h2>
-
-                <p>Here's what implementing SVD meant for our operation:</p>
-
-                <div class="industry-example">
-                    <strong>Before SVD:</strong><br>
-                    • 3-5 production stops per month for sensor replacement<br>
-                    • $50,000 per stop × 4 stops = $200,000/month loss<br>
-                    • Maintenance team stressed, working overtime<br>
-                    • Quality variations due to incomplete monitoring<br><br>
-                    
-                    <strong>After SVD:</strong><br>
-                    • 0-1 production stops per month<br>
-                    • Saved $150,000/month in downtime<br>
-                    • Predictive sensor maintenance during planned stops<br>
-                    • Quality consistency improved by 23%<br>
-                    • Caught 2 developing equipment issues early<br><br>
-                    
-                    <strong>ROI:</strong> Implementation cost $50,000, yearly savings $1.8M<br>
-                    <strong>Payback period:</strong> 2 weeks
+                    Furnace characteristics change over time (wear, maintenance). Retrain on a schedule.
                 </div>
 
                 <h2>Where to Learn More</h2>
 
-                <p>If this clicked for you, here's where to go deeper:</p>
                 <ul>
-                    <li><strong>The Netflix Prize papers:</strong> See how BellKor's Pragmatic Chaos won with SVD</li>
-                    <li><strong>Google's PageRank paper:</strong> SVD's cousin algorithm that built a $1T company</li>
-                    <li><strong>Numerical Recipes:</strong> The implementation details that matter</li>
+                    <li><strong>Koren, Bell &amp; Volinsky (2009):</strong> "Matrix Factorization Techniques for Recommender Systems," <em>IEEE Computer</em> — the canonical account of the Netflix Prize methods</li>
+                    <li><strong>Numerical Recipes</strong> (Press et al.): the implementation details that matter</li>
                     <li><strong>Your own data:</strong> Take any spreadsheet with gaps and try SVD</li>
                 </ul>
 
                 <div class="truth-bomb">
                     <strong>The Bottom Line:</strong><br>
-                    SVD is not just an algorithm – it's a way of thinking about incomplete information. Instead of seeing missing data as a problem, see it as an opportunity to discover hidden patterns. The same math that helps Netflix guess your movie tastes can help you understand your industrial systems at a deeper level than complete data ever could.
+                    SVD is not just an algorithm – it's a way of thinking about incomplete information. Instead of seeing missing data as a problem, see it as an opportunity to discover hidden patterns. The same mathematics that predicts movie ratings can help you understand your industrial systems at a deeper level than complete data ever could.
                 </div>
 
                 <div class="next-post">
-                    <p>Next up: Why your mill's temperature distribution definitely isn't normal (and what to do about it)</p>
-                    <a href="2025-09-26-probability-not-normal.html">Continue to: Probability - Why Your Mill Doesn't Follow Normal Distributions →</a>
+                    <p>More Phase 3 modules are in development. Browse everything currently live from the program index.</p>
+                    <a href="../blog.html">← All Program Modules</a>
                 </div>
             </div>
         </article>
