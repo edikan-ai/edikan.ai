@@ -1,0 +1,62 @@
+# Scheduled publication of Perspectives 02 ("36 Hours").
+#
+# Merges origin/staged/36-hours into main at the scheduled time, which publishes
+# the staged essay integration via GitHub Pages. workflow_dispatch allows a
+# manual early trigger or a dry-run test at any time.
+#
+# HOUSEKEEPING NOTE: after successful publication, this workflow file and the
+# staged/36-hours branch can be deleted in the next housekeeping commit.
+
+name: Publish 36 Hours
+
+on:
+  schedule:
+    # 15:00 UTC on August 26 = 9:00 AM America/Denver (MDT, UTC-6)
+    - cron: "0 15 26 8 *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Merge staged branch and push
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          # Guard 1: no-op if the staged branch no longer exists (e.g. already
+          # published and deleted). A re-run must never fail confusingly.
+          if ! git ls-remote --exit-code --heads origin staged/36-hours > /dev/null; then
+            echo "::notice::staged/36-hours does not exist on origin - nothing to publish. No-op."
+            exit 0
+          fi
+
+          git fetch origin staged/36-hours
+
+          # Guard 2: no-op if the staged branch is already fully merged into
+          # main (e.g. published earlier by hand or by a prior run). This makes
+          # re-runs idempotent - a double-publish is impossible.
+          if git merge-base --is-ancestor origin/staged/36-hours HEAD; then
+            echo "::notice::staged/36-hours is already merged into main - already published. No-op."
+            exit 0
+          fi
+
+          # Merge; fail loudly on conflict rather than forcing anything.
+          if ! git merge --no-ff origin/staged/36-hours -m "Publish Perspectives 02: 36 Hours (scheduled merge of staged/36-hours)"; then
+            echo "::error::Merge conflict between main and staged/36-hours. Aborting without pushing - resolve manually."
+            git merge --abort
+            exit 1
+          fi
+
+          git push origin main
+          echo "::notice::36 Hours published: staged/36-hours merged into main and pushed."
