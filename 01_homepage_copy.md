@@ -96,11 +96,11 @@ is maintained on the [FORGE Framework](#) page.
 
 **Heading:** One Curriculum, Seven Languages, Real Plants
 
-The 18-month curriculum covers seven programming languages — Python, Rust, Julia, C++, R,
-SQL, and MATLAB — mathematical foundations including linear algebra, calculus, and
-optimization theory, and machine learning applications specific to manufacturing
-environments. Each module connects theory to real industrial problems: aluminum smelter
-optimization, steel mill scheduling, and supply chain coordination.
+The 18-month curriculum covers seven programming languages (Python, Rust, Julia, C++, R,
+SQL, MATLAB), mathematical foundations (linear algebra, calculus, optimization theory), and
+machine learning applications specific to manufacturing environments. Each module connects
+theory to real industrial problems: aluminum smelter optimization, steel mill scheduling,
+and supply chain coordination.
 
 Every language earns its place through an industrial use case. Python for analytics and
 machine learning. SQL for plant historians and production databases. MATLAB for the control

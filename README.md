@@ -10,11 +10,11 @@ industrial optimization expertise: free, open, and built for the practitioners A
 industry runs on, for technicians, plant engineers, and analysts who cannot access traditional
 graduate education.
 
-The 18-month curriculum covers seven programming languages — Python, Rust, Julia, C++, R,
-SQL, and MATLAB — mathematical foundations including linear algebra, calculus, and
-optimization theory, and machine learning applications specific to manufacturing
-environments. Each module connects theory to real industrial problems: aluminum smelter
-optimization, steel mill scheduling, and supply chain coordination.
+The 18-month curriculum covers seven programming languages (Python, Rust, Julia, C++, R,
+SQL, MATLAB), mathematical foundations (linear algebra, calculus, optimization theory), and
+machine learning applications specific to manufacturing environments. Each module connects
+theory to real industrial problems: aluminum smelter optimization, steel mill scheduling,
+and supply chain coordination.
 
 The full curriculum architecture is documented on the
 [FORGE Framework](https://edikan.ai/framework.html) page.
