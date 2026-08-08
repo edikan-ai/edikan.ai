@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The FORGE Framework — Curriculum Architecture | Project FORGE</title>
+    <meta name="description" content="The pedagogical architecture behind Project FORGE: a competency-based, 18-month pathway from programming fundamentals to industrial optimization, designed to scale from open access to institutional partnership.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #667eea;
+            --primary-dark: #5a67d8;
+            --secondary: #764ba2;
+            --accent: #f093fb;
+            --success: #48bb78;
+            --warning: #f6ad55;
+            --error: #fc8181;
+            --dark: #1a202c;
+            --gray-900: #2d3748;
+            --gray-800: #4a5568;
+            --gray-700: #718096;
+            --gray-600: #a0aec0;
+            --gray-500: #cbd5e0;
+            --gray-400: #e2e8f0;
+            --gray-300: #edf2f7;
+            --gray-200: #f7fafc;
+            --white: #ffffff;
+            --gradient: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: var(--white);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background: var(--white);
+            border-bottom: 1px solid var(--gray-400);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.95);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        .nav-link {
+            color: var(--gray-700);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary);
+        }
+        
+        .nav-cta {
+            background: var(--gradient);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 5rem 0;
+            background: linear-gradient(180deg, var(--gray-200) 0%, var(--white) 100%);
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--gray-700);
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .hero-description {
+            font-size: 1.1rem;
+            color: var(--gray-600);
+            margin-bottom: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.8;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 0.875rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+        }
+        
+        .btn-primary {
+            background: var(--gradient);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-xl);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        /* Project FORGE Section */
+        .project-forge {
+            padding: 5rem 0;
+            background: var(--white);
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        .section-description {
+            font-size: 1.2rem;
+            color: var(--gray-600);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* Learning Pathway */
+        .learning-pathway {
+            display: grid;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .pathway-phase {
+            background: var(--white);
+            border: 2px solid var(--gray-400);
+            border-radius: 16px;
+            padding: 2rem;
+            position: relative;
+            transition: all 0.3s;
+        }
+        
+        .pathway-phase:hover {
+            border-color: var(--primary);
+            box-shadow: var(--shadow-lg);
+            transform: translateX(10px);
+        }
+        
+        .phase-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1.5rem;
+        }
+        
+        .phase-info {
+            flex: 1;
+        }
+        
+        .phase-number {
+            display: inline-block;
+            background: var(--gradient);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .phase-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        .phase-duration {
+            color: var(--gray-600);
+            font-size: 0.95rem;
+        }
+        
+        .phase-status {
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+        
+        .status-active {
+            background: var(--success);
+            color: white;
+        }
+        
+        .status-upcoming {
+            background: var(--gray-400);
+            color: var(--gray-700);
+        }
+        
+        .phase-content {
+            margin-bottom: 1.5rem;
+        }
+        
+        .phase-description {
+            color: var(--gray-700);
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+        
+        .phase-topics {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        
+        .topic-badge {
+            background: var(--gray-300);
+            color: var(--gray-700);
+            padding: 0.375rem 0.875rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        
+        .phase-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: none;
+            transition: gap 0.3s;
+        }
+        
+        .phase-cta:hover {
+            gap: 1rem;
+        }
+        
+        /* Blog Preview Section */
+        .blog-section {
+            padding: 5rem 0;
+            background: var(--gray-200);
+        }
+        
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .blog-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+        }
+        
+        .blog-card-header {
+            padding: 1.5rem;
+            background: var(--gradient);
+            color: white;
+        }
+        
+        .blog-category {
+            font-size: 0.875rem;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+        
+        .blog-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+        
+        .blog-card-body {
+            padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .blog-excerpt {
+            color: var(--gray-700);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            flex: 1;
+        }
+        
+        .blog-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.875rem;
+            color: var(--gray-600);
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 5rem 0;
+            background: white;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+        
+        .feature {
+            text-align: center;
+        }
+        
+        .feature-icon {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 1.5rem;
+            background: var(--gradient);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+        
+        .feature-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: var(--dark);
+        }
+        
+        .feature-description {
+            color: var(--gray-600);
+            line-height: 1.8;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            padding: 5rem 0;
+            background: var(--gradient);
+            color: white;
+            text-align: center;
+        }
+        
+        .cta-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+        
+        .cta-description {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn-white {
+            background: white;
+            color: var(--primary);
+        }
+        
+        .btn-white:hover {
+            background: var(--gray-200);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: var(--gray-400);
+            padding: 3rem 0 2rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-section h3 {
+            color: white;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+        
+        .footer-section p {
+            line-height: 1.8;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-links a {
+            color: var(--gray-400);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid var(--gray-800);
+            padding-top: 2rem;
+            text-align: center;
+        }
+        
+        /* Mobile Menu Toggle */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--dark);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.25rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu-toggle {
+                display: block;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-fade-in {
+            animation: fadeInUp 0.6s ease-out;
+        }
+    
+        /* Prose sections (v2) */
+        .prose-section {
+            padding: 5rem 0;
+        }
+        .prose-section.alt {
+            background: var(--gray-200);
+        }
+        .prose {
+            max-width: 800px;
+            margin: 0 auto;
+            color: var(--gray-800);
+            font-size: 1.1rem;
+            line-height: 1.9;
+        }
+        .prose p {
+            margin-bottom: 1.25rem;
+        }
+        .hero-eyebrow {
+            display: inline-block;
+            letter-spacing: 0.15em;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        .audience-list {
+            max-width: 800px;
+            margin: 0 auto;
+            list-style: none;
+        }
+        .audience-list li {
+            background: var(--white);
+            border: 2px solid var(--gray-400);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+            color: var(--gray-800);
+        }
+        .roadmap-note {
+            max-width: 800px;
+            margin: 2rem auto 0;
+            color: var(--gray-600);
+            font-size: 0.95rem;
+            text-align: center;
+        }
+    
+        /* Framework page */
+        .page-header {
+            padding: 4rem 0 2rem;
+            background: linear-gradient(180deg, var(--gray-200) 0%, var(--white) 100%);
+        }
+        .page-header h1 {
+            font-size: 2.75rem;
+            font-weight: 800;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+        .standfirst {
+            font-size: 1.25rem;
+            color: var(--gray-700);
+            max-width: 800px;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+        .page-meta {
+            color: var(--gray-600);
+            font-size: 0.95rem;
+        }
+        .framework-section {
+            padding: 3rem 0;
+        }
+        .framework-section h2 {
+            font-size: 1.9rem;
+            font-weight: 800;
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+        }
+        .framework-section .prose h3 {
+            font-size: 1.15rem;
+            color: var(--dark);
+            margin: 1.75rem 0 0.5rem;
+        }
+        .curriculum-table-wrap {
+            overflow-x: auto;
+            margin: 2rem 0;
+        }
+        .curriculum-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+        .curriculum-table th {
+            background: var(--gradient);
+            color: white;
+            text-align: left;
+            padding: 0.9rem 1rem;
+        }
+        .curriculum-table td {
+            padding: 0.9rem 1rem;
+            border-bottom: 1px solid var(--gray-400);
+            vertical-align: top;
+            line-height: 1.7;
+        }
+        .status-pill {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+        .pill-live { background: var(--success); color: white; }
+        .pill-dev { background: var(--gray-400); color: var(--gray-800); }
+        .pill-partial { background: var(--warning); color: white; }
+        .footer-designer-line {
+            color: var(--gray-600);
+            font-size: 0.95rem;
+            text-align: center;
+            padding: 2rem 0 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="/" class="logo">edikan.ai</a>
+            <div class="nav-links">
+                <a href="index.html#pathway" class="nav-link">Curriculum</a>
+                <a href="framework.html" class="nav-link">FORGE Framework</a>
+                <a href="blog.html" class="nav-link">Modules</a>
+                <a href="index.html#manufacturers" class="nav-link">For Manufacturers</a>
+                <a href="https://github.com/edikan-ai/edikan-ai-docs" target="_blank" class="nav-link">GitHub</a>
+                <a href="index.html#pathway" class="nav-cta">Explore the Curriculum</a>
+            </div>
+            <button class="mobile-menu-toggle">☰</button>
+        </nav>
+    </header>
+
+    <section class="page-header">
+        <div class="container">
+            <h1>The FORGE Framework</h1>
+            <p class="standfirst">
+                How an 18-month open curriculum is engineered to turn industrial practitioners
+                into optimization-capable engineers — and how the model scales beyond one website.
+            </p>
+            <p class="page-meta">Published: August 8, 2026 · Last revised: August 8, 2026</p>
+        </div>
+    </section>
+
+    <section class="framework-section">
+        <div class="container">
+            <h2>1. Design Principles</h2>
+            <div class="prose">
+                <h3>Start where the workforce is.</h3>
+                <p>
+                    FORGE assumes no prior programming, no calculus, and no statistics. This is not a
+                    simplification; it is the design constraint that makes the program useful. The people
+                    American industry most needs to upskill — technicians, operators, plant engineers — are
+                    systematically excluded by programs that assume a computer science degree on day one.
+                </p>
+                <h3>Foundations before frameworks.</h3>
+                <p>
+                    Every method is implemented from first principles before any library or AI tool is
+                    introduced. A practitioner who has built gradient descent by hand can debug a model that
+                    misbehaves in production. A practitioner who has only called an API cannot.
+                </p>
+                <h3>Theory travels to the plant, every time.</h3>
+                <p>
+                    No module ends at the whiteboard. Linear algebra is taught through sensor-network data
+                    recovery. Regression is taught through roll-force prediction. Scheduling theory is taught
+                    through steel mill and smelter operations. The industrial application is the pedagogy,
+                    not the appendix.
+                </p>
+                <h3>Competency, not completion.</h3>
+                <p>
+                    Each phase defines what a learner can <em>do</em> on exit, stated as capabilities an
+                    employer can verify — not certificates of attendance.
+                </p>
+                <h3>Open by default.</h3>
+                <p>
+                    All core materials are free and public. Scarcity of training is the problem FORGE exists
+                    to solve; it cannot also be the business model.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="framework-section" style="background: var(--gray-200);">
+        <div class="container">
+            <h2>2. The 18-Month Architecture</h2>
+            <div class="curriculum-table-wrap">
+                <table class="curriculum-table">
+                    <thead>
+                        <tr>
+                            <th>Phase</th>
+                            <th>Focus</th>
+                            <th>Exit competencies (abridged)</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>1. Foundations</strong></td>
+                            <td>Programming from first principles: memory, control flow, functions, data structures, debugging</td>
+                            <td>Read, write, and debug non-trivial programs unassisted; explain what code does at the memory level</td>
+                            <td><span class="status-pill pill-live">LIVE</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>2. Core Competence</strong></td>
+                            <td>Production-quality programming across the language set; algorithms and complexity; Git; SQL fundamentals</td>
+                            <td>Ship maintainable code; query and manage industrial databases; reason about performance</td>
+                            <td><span class="status-pill pill-dev">IN DEVELOPMENT</span><br><span style="font-size:0.85em;color:var(--gray-600);">target window TBD</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>3. Mathematical Foundations</strong></td>
+                            <td>Linear algebra, calculus, statistics, probability, optimization theory</td>
+                            <td>Formulate industrial questions mathematically; apply SVD/PCA, estimation, and basic optimization to plant data</td>
+                            <td><span class="status-pill pill-partial">PARTIAL</span><br><span style="font-size:0.85em;color:var(--gray-600);">first modules live</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>4. ML for Manufacturing</strong></td>
+                            <td>Regression, classification, neural networks, time series, anomaly detection — from scratch, then frameworks</td>
+                            <td>Build, validate, and stress-test predictive models on manufacturing data</td>
+                            <td><span class="status-pill pill-dev">IN DEVELOPMENT</span><br><span style="font-size:0.85em;color:var(--gray-600);">target window TBD</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>5. Industrial Optimization</strong></td>
+                            <td>Linear, integer, and network programming; scheduling; capacity and supply chain models</td>
+                            <td>Formulate and solve production scheduling and supply chain problems; interpret duals and sensitivity</td>
+                            <td><span class="status-pill pill-dev">IN DEVELOPMENT</span><br><span style="font-size:0.85em;color:var(--gray-600);">target window TBD</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>6. Deployment &amp; Capstones</strong></td>
+                            <td>Data pipelines, monitoring, model maintenance, capstone projects</td>
+                            <td>Take a model from notebook to monitored production use; complete an end-to-end industrial capstone</td>
+                            <td><span class="status-pill pill-dev">IN DEVELOPMENT</span><br><span style="font-size:0.85em;color:var(--gray-600);">target window TBD</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <section class="framework-section">
+        <div class="container">
+            <h2>3. The Language Set, Justified</h2>
+            <div class="prose">
+                <p>
+                    Seven languages is a deliberate curriculum decision, not breadth for its own sake. Industrial
+                    environments are heterogeneous, and each language maps to a layer of the real stack:
+                </p>
+                <ul style="margin-left: 1.5rem; line-height: 1.9;">
+                    <li><strong>Python</strong> — analytics, machine learning, and the lingua franca of industrial data science.</li>
+                    <li><strong>SQL</strong> — plant historians, MES databases, and production records; the most-used and least-taught skill in industry.</li>
+                    <li><strong>MATLAB</strong> — the installed base of control engineering; fluency here is how FORGE graduates collaborate with existing plant engineering teams.</li>
+                    <li><strong>C++</strong> — real-time systems and performance-critical processing at the edge.</li>
+                    <li><strong>Rust</strong> — memory-safe systems programming for the next generation of edge and IIoT deployments.</li>
+                    <li><strong>Julia</strong> — scientific computing and optimization, where model formulation and speed meet.</li>
+                    <li><strong>R</strong> — statistical quality control and the SPC tradition manufacturing already trusts.</li>
+                </ul>
+                <p style="margin-top: 1.25rem;">
+                    Learners achieve working fluency across the set and depth in the layers their role demands.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="framework-section" style="background: var(--gray-200);">
+        <div class="container">
+            <h2>4. Applied Problem Domains</h2>
+            <div class="prose">
+                <p>
+                    FORGE's worked examples are drawn from operations of strategic significance to American
+                    industry, so that training capacity and national industrial priorities compound rather than
+                    compete:
+                </p>
+                <ul style="margin-left: 1.5rem; line-height: 1.9;">
+                    <li><strong>Aluminum smelter optimization</strong> — energy-intensive continuous production under price and power constraints.</li>
+                    <li><strong>Steel mill scheduling</strong> — sequencing, roll-force prediction, and predictive maintenance in continuous casting and hot rolling.</li>
+                    <li><strong>Supply chain coordination</strong> — multi-echelon networks, including critical mineral supply chains where processing chokepoints, not geology, bind capacity.</li>
+                </ul>
+                <p style="margin-top: 1.25rem;">
+                    <strong>On the roadmap — Optimization for Critical Supply Chains &amp; Defense Industrial Capacity:</strong> a
+                    dedicated advanced track applying the full FORGE toolkit to publicly documented problems in
+                    industrial surge capacity: munitions production scheduling, strategic material inventory
+                    modeling, and processing bottleneck analysis, built exclusively on open data and published
+                    sources. Module outline to be published on this page.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="framework-section">
+        <div class="container">
+            <h2>5. The Scaling Model</h2>
+            <div class="prose">
+                <p>FORGE is engineered to grow through three deliberate stages:</p>
+                <h3>Stage 1 — Open access (now).</h3>
+                <p>
+                    Self-paced curriculum, public repository, open problem sets. Success measure: complete,
+                    coherent coverage of Phases 1–4.
+                </p>
+                <h3>Stage 2 — Cohorts.</h3>
+                <p>
+                    Facilitated cohorts with fixed timelines, peer review, and instructor office hours — the
+                    structure most adult learners need to finish what open courseware starts.
+                </p>
+                <h3>Stage 3 — Institutional partnership.</h3>
+                <p>
+                    The curriculum packaged for manufacturers (in-house upskilling tracks mapped to their own
+                    systems) and for community colleges and training programs (technician-level pathways feeding
+                    the same progression). This is where a website becomes workforce infrastructure.
+                </p>
+                <p>
+                    Manufacturers interested in Stage 2–3 pilots: <a href="mailto:contact@edikan.ai">contact@edikan.ai</a>.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="framework-section" style="background: var(--gray-200);">
+        <div class="container">
+            <h2>6. Governance of Quality</h2>
+            <div class="prose">
+                <ul style="margin-left: 1.5rem; line-height: 1.9;">
+                    <li>All curriculum code is public on GitHub and issues are open; errors found by learners are fixed in public.</li>
+                    <li>Figures, datasets, and industrial claims used in teaching materials are cited to primary public sources.</li>
+                    <li>The Framework itself is versioned; substantive changes are dated on this page.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p class="footer-designer-line">
+                The FORGE Framework was designed by Edikan Udofia, operations researcher, Colorado School of Mines.
+            </p>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Project FORGE / edikan.ai — Open-access industrial AI training</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelector('.mobile-menu-toggle')?.addEventListener('click', function() {
+            const navLinks = document.querySelector('.nav-links');
+            if (navLinks.style.display === 'flex') {
+                navLinks.style.display = 'none';
+            } else {
+                navLinks.style.display = 'flex';
+                navLinks.style.position = 'absolute';
+                navLinks.style.top = '60px';
+                navLinks.style.left = '0';
+                navLinks.style.right = '0';
+                navLinks.style.background = 'white';
+                navLinks.style.flexDirection = 'column';
+                navLinks.style.padding = '2rem';
+                navLinks.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
+            }
+        });
+    </script>
+</body>
+</html>
