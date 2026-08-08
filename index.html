@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>edikan.ai - Master Industrial AI Through Project FORGE</title>
-    <meta name="description" content="A guided learning pathway from programming fundamentals to industrial AI mastery. Learn through real-world projects and hands-on coding.">
+    <title>Project FORGE — Open-Access Industrial AI Training | edikan.ai</title>
+    <meta name="description" content="Project FORGE is an open-access, 18-month training pathway in industrial AI and optimization, built for American manufacturing practitioners who cannot access traditional graduate education.">
     
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -484,7 +484,7 @@
         
         .footer-content {
             display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
+            grid-template-columns: 2fr 1fr 1fr;
             gap: 3rem;
             margin-bottom: 2rem;
         }
@@ -579,6 +579,53 @@
         .animate-fade-in {
             animation: fadeInUp 0.6s ease-out;
         }
+    
+        /* Prose sections (v2) */
+        .prose-section {
+            padding: 5rem 0;
+        }
+        .prose-section.alt {
+            background: var(--gray-200);
+        }
+        .prose {
+            max-width: 800px;
+            margin: 0 auto;
+            color: var(--gray-800);
+            font-size: 1.1rem;
+            line-height: 1.9;
+        }
+        .prose p {
+            margin-bottom: 1.25rem;
+        }
+        .hero-eyebrow {
+            display: inline-block;
+            letter-spacing: 0.15em;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        .audience-list {
+            max-width: 800px;
+            margin: 0 auto;
+            list-style: none;
+        }
+        .audience-list li {
+            background: var(--white);
+            border: 2px solid var(--gray-400);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+            color: var(--gray-800);
+        }
+        .roadmap-note {
+            max-width: 800px;
+            margin: 2rem auto 0;
+            color: var(--gray-600);
+            font-size: 0.95rem;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -587,11 +634,12 @@
         <nav class="container">
             <a href="/" class="logo">edikan.ai</a>
             <div class="nav-links">
-                <a href="#project-forge" class="nav-link">Project FORGE</a>
-                <a href="blog.html" class="nav-link">Blog</a>
+                <a href="#pathway" class="nav-link">Curriculum</a>
+                <a href="framework.html" class="nav-link">FORGE Framework</a>
+                <a href="blog.html" class="nav-link">Modules</a>
+                <a href="#manufacturers" class="nav-link">For Manufacturers</a>
                 <a href="https://github.com/edikan-ai/edikan-ai-docs" target="_blank" class="nav-link">GitHub</a>
-                <a href="https://linkedin.com/in/edikanudofa" target="_blank" class="nav-link">LinkedIn</a>
-                <a href="blog.html" class="nav-cta">Start Learning →</a>
+                <a href="#pathway" class="nav-cta">Explore the Curriculum</a>
             </div>
             <button class="mobile-menu-toggle">☰</button>
         </nav>
@@ -600,215 +648,362 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="container animate-fade-in">
-            <h1>Master Industrial AI<br>Through Project FORGE</h1>
-            <p class="hero-subtitle">From AI-Generated Code to True Understanding</p>
+            <span class="hero-eyebrow">AN OPEN-ACCESS TRAINING INITIATIVE</span>
+            <h1>Building the Industrial AI Workforce, From the Ground Up</h1>
             <p class="hero-description">
-                Join me on an 18-month journey from programming fundamentals to industrial AI mastery. 
-                Learn Python, Rust, Julia, C++, R, SQL, and MATLAB through real-world manufacturing applications. 
-                No more copy-paste coding – build genuine expertise from the ground up.
+                Project FORGE is a structured 18-month pathway from programming fundamentals to industrial
+                optimization expertise — free, open, and built for the practitioners American industry
+                actually runs on: technicians, plant engineers, and analysts who will never sit in a
+                graduate classroom.
             </p>
             <div class="hero-buttons">
-                <a href="blog.html" class="btn btn-primary">
-                    📚 Start with the Blog
+                <a href="#pathway" class="btn btn-primary">
+                    Explore the Curriculum
                 </a>
-                <a href="#project-forge" class="btn btn-secondary">
-                    🔥 Learn About Project FORGE
+                <a href="framework.html" class="btn btn-secondary">
+                    Read the FORGE Framework
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- Project FORGE Section -->
-    <section class="project-forge" id="project-forge">
+    <!-- The Problem -->
+    <section class="prose-section">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">The Project FORGE Pathway</h2>
+                <h2 class="section-title">The Bottleneck Is Not Technology. It Is People.</h2>
+            </div>
+            <div class="prose">
+                <p>
+                    American industry is being asked to reindustrialize: reshore manufacturing, secure critical
+                    mineral supply chains, and rebuild defense industrial capacity. The mathematics and software
+                    to optimize these operations already exist. What does not exist, at anywhere near the required
+                    scale, is a workforce trained to apply them.
+                </p>
+                <p>
+                    Graduate programs in operations research and industrial AI produce a few thousand specialists
+                    a year. The industrial base needs hundreds of thousands of practitioners — people on plant
+                    floors and in control rooms who can read sensor data, build a forecast, formulate a scheduling
+                    model, and know when a prediction should not be trusted.
+                </p>
+                <p>
+                    Project FORGE exists to close that gap from the bottom of the pipeline, where the workforce
+                    actually is.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- The FORGE Pathway -->
+    <section class="project-forge" id="pathway">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">The FORGE Pathway</h2>
                 <p class="section-description">
-                    A structured learning journey designed to take you from programming basics to industrial AI expertise
+                    A deliberate, competency-based progression. Each phase assumes nothing from the
+                    previous one except what it explicitly taught.
                 </p>
             </div>
             
             <div class="learning-pathway">
-                <!-- Month 00: The Confession -->
                 <div class="pathway-phase">
                     <div class="phase-header">
                         <div class="phase-info">
-                            <span class="phase-number">MONTH 00</span>
-                            <h3 class="phase-title">The Confession: Starting from Zero</h3>
-                            <p class="phase-duration">Current Phase • 6 Blog Posts</p>
+                            <span class="phase-number">PHASE 1</span>
+                            <h3 class="phase-title">Foundations</h3>
                         </div>
-                        <span class="phase-status status-active">Active</span>
+                        <span class="phase-status status-active">LIVE</span>
                     </div>
                     <div class="phase-content">
                         <p class="phase-description">
-                            Admitting what I don't know and building true foundations. No more faking it with AI-generated code.
-                            Learning variables, loops, functions, and data structures the right way.
+                            Programming from first principles: variables and memory, control flow, functions, data
+                            structures, and disciplined debugging. FORGE starts at zero by design — because that is where
+                            much of the industrial workforce starts, and because expertise built on unexamined foundations
+                            fails under production pressure.
                         </p>
                         <div class="phase-topics">
-                            <span class="topic-badge">Variables & Memory</span>
-                            <span class="topic-badge">Loops Without Stack Overflow</span>
-                            <span class="topic-badge">Functions That Work</span>
+                            <span class="topic-badge">Variables &amp; Memory</span>
+                            <span class="topic-badge">Control Flow</span>
+                            <span class="topic-badge">Functions</span>
                             <span class="topic-badge">Data Structures</span>
-                            <span class="topic-badge">Debugging Skills</span>
-                            <span class="topic-badge">The Truth About AI Tools</span>
+                            <span class="topic-badge">Debugging</span>
                         </div>
                     </div>
                     <a href="blog.html" class="phase-cta">
-                        Read Month 00 Posts →
+                        Start Phase 1 →
                     </a>
                 </div>
 
-                <!-- Month 0: Competence -->
                 <div class="pathway-phase">
                     <div class="phase-header">
                         <div class="phase-info">
-                            <span class="phase-number">MONTH 0</span>
-                            <h3 class="phase-title">Building Core Competence</h3>
-                            <p class="phase-duration">6 Blog Posts</p>
+                            <span class="phase-number">PHASE 2</span>
+                            <h3 class="phase-title">Core Competence</h3>
                         </div>
-                        <span class="phase-status status-upcoming">Upcoming</span>
+                        <span class="phase-status status-upcoming">IN DEVELOPMENT</span>
                     </div>
                     <div class="phase-content">
                         <p class="phase-description">
-                            Developing solid programming skills across multiple languages. Understanding algorithms, 
-                            time complexity, and writing production-ready code.
+                            Production-quality programming across the FORGE language set, with algorithms, complexity,
+                            version control, and database fundamentals — the working toolkit of an industrial analyst.
                         </p>
                         <div class="phase-topics">
-                            <span class="topic-badge">Python Mastery</span>
-                            <span class="topic-badge">Rust Fundamentals</span>
-                            <span class="topic-badge">Julia for Science</span>
-                            <span class="topic-badge">C++ Performance</span>
-                            <span class="topic-badge">SQL Databases</span>
-                            <span class="topic-badge">Git & DevOps</span>
+                            <span class="topic-badge">Algorithms &amp; Complexity</span>
+                            <span class="topic-badge">Version Control</span>
+                            <span class="topic-badge">Database Fundamentals</span>
                         </div>
                     </div>
-                    <a href="blog.html" class="phase-cta">
-                        View Upcoming Posts →
-                    </a>
                 </div>
 
-                <!-- Month 1: Mathematics -->
                 <div class="pathway-phase">
                     <div class="phase-header">
                         <div class="phase-info">
-                            <span class="phase-number">MONTH 1</span>
+                            <span class="phase-number">PHASE 3</span>
                             <h3 class="phase-title">Mathematical Foundations</h3>
-                            <p class="phase-duration">6 Blog Posts</p>
                         </div>
-                        <span class="phase-status status-upcoming">Upcoming</span>
+                        <span class="phase-status status-upcoming">IN DEVELOPMENT</span>
                     </div>
                     <div class="phase-content">
                         <p class="phase-description">
-                            The math that powers AI: Linear algebra, calculus, statistics, and optimization. 
-                            Applied to real industrial problems like sensor data analysis and quality prediction.
+                            The mathematics that powers industrial AI: linear algebra, calculus, statistics, probability,
+                            and optimization theory — taught through plant problems such as sensor data recovery and
+                            quality prediction, not abstract exercises.
                         </p>
                         <div class="phase-topics">
                             <span class="topic-badge">Linear Algebra</span>
                             <span class="topic-badge">Calculus</span>
                             <span class="topic-badge">Statistics</span>
                             <span class="topic-badge">Probability</span>
-                            <span class="topic-badge">Optimization</span>
-                            <span class="topic-badge">SVD & PCA</span>
+                            <span class="topic-badge">Optimization Theory</span>
                         </div>
                     </div>
-                    <a href="blog.html" class="phase-cta">
-                        Preview Math Topics →
+                    <a href="posts/2025-09-25-svd-missing-sensor-data.html" class="phase-cta">
+                        First module live: Sensor Data Recovery with SVD →
                     </a>
                 </div>
 
-                <!-- Month 2: Machine Learning -->
                 <div class="pathway-phase">
                     <div class="phase-header">
                         <div class="phase-info">
-                            <span class="phase-number">MONTH 2</span>
-                            <h3 class="phase-title">Machine Learning Fundamentals</h3>
-                            <p class="phase-duration">6 Blog Posts</p>
+                            <span class="phase-number">PHASE 4</span>
+                            <h3 class="phase-title">Machine Learning for Manufacturing</h3>
                         </div>
-                        <span class="phase-status status-upcoming">Upcoming</span>
+                        <span class="phase-status status-upcoming">IN DEVELOPMENT</span>
                     </div>
                     <div class="phase-content">
                         <p class="phase-description">
-                            Core ML concepts applied to industrial data. From regression to neural networks, 
-                            all implemented from scratch before using frameworks.
+                            Regression, classification, neural networks, time series, and anomaly detection, implemented
+                            from scratch before frameworks are introduced, and applied to manufacturing data throughout.
                         </p>
                         <div class="phase-topics">
-                            <span class="topic-badge">Linear Regression</span>
+                            <span class="topic-badge">Regression</span>
                             <span class="topic-badge">Classification</span>
                             <span class="topic-badge">Neural Networks</span>
-                            <span class="topic-badge">Deep Learning</span>
                             <span class="topic-badge">Time Series</span>
                             <span class="topic-badge">Anomaly Detection</span>
                         </div>
                     </div>
-                    <a href="blog.html" class="phase-cta">
-                        Explore ML Content →
-                    </a>
                 </div>
+
+                <div class="pathway-phase">
+                    <div class="phase-header">
+                        <div class="phase-info">
+                            <span class="phase-number">PHASE 5</span>
+                            <h3 class="phase-title">Industrial Optimization</h3>
+                        </div>
+                        <span class="phase-status status-upcoming">IN DEVELOPMENT</span>
+                    </div>
+                    <div class="phase-content">
+                        <p class="phase-description">
+                            Mathematical programming for real operations: production scheduling, capacity planning,
+                            network and supply chain models.
+                        </p>
+                        <div class="phase-topics">
+                            <span class="topic-badge">Production Scheduling</span>
+                            <span class="topic-badge">Capacity Planning</span>
+                            <span class="topic-badge">Supply Chain Models</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pathway-phase">
+                    <div class="phase-header">
+                        <div class="phase-info">
+                            <span class="phase-number">PHASE 6</span>
+                            <h3 class="phase-title">Deployment &amp; Capstones</h3>
+                        </div>
+                        <span class="phase-status status-upcoming">IN DEVELOPMENT</span>
+                    </div>
+                    <div class="phase-content">
+                        <p class="phase-description">
+                            Taking models to the plant floor: data pipelines, monitoring, model maintenance, and capstone
+                            projects drawn from live industrial problem sets.
+                        </p>
+                        <div class="phase-topics">
+                            <span class="topic-badge">Data Pipelines</span>
+                            <span class="topic-badge">Monitoring</span>
+                            <span class="topic-badge">Model Maintenance</span>
+                            <span class="topic-badge">Capstones</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <p class="roadmap-note">
+                Phases marked IN DEVELOPMENT are in development, with modules published on a rolling schedule.
+                The full curriculum map, including planned release windows, is maintained on the
+                <a href="framework.html">FORGE Framework</a> page.
+            </p>
+        </div>
+    </section>
+
+    <!-- What the Curriculum Covers -->
+    <section class="prose-section alt" id="curriculum">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">One Curriculum, Seven Languages, Real Plants</h2>
+            </div>
+            <div class="prose">
+                <p>
+                    The 18-month curriculum covers seven programming languages — Python, Rust, Julia, C++, R,
+                    SQL, and MATLAB — mathematical foundations including linear algebra, calculus, and
+                    optimization theory, and machine learning applications specific to manufacturing
+                    environments. Each module connects theory to real industrial problems: aluminum smelter
+                    optimization, steel mill scheduling, and supply chain coordination.
+                </p>
+                <p>
+                    Every language earns its place through an industrial use case. Python for analytics and
+                    machine learning. SQL for plant historians and production databases. MATLAB for the control
+                    engineering installed base. C++ and Rust for real-time and edge systems. Julia for scientific
+                    computing and optimization. R for statistical quality control.
+                </p>
             </div>
         </div>
     </section>
 
-    <!-- Blog Preview Section -->
+    <!-- Who This Is For -->
+    <section class="prose-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Built for the Practitioners Industry Runs On</h2>
+            </div>
+            <ul class="audience-list">
+                <li>
+                    <strong>Technicians and operators</strong> who work with industrial data every day and have never been
+                    offered a structured path into analytics.
+                </li>
+                <li>
+                    <strong>Plant and process engineers</strong> at small and mid-size manufacturers, where there is no data
+                    science team to call.
+                </li>
+                <li>
+                    <strong>Analysts and career-changers</strong> who need graduate-level capability without a graduate
+                    program's cost, admissions gate, or timeline.
+                </li>
+            </ul>
+            <div class="prose" style="margin-top: 2rem;">
+                <p>
+                    No prerequisites. No tuition. No application. The only requirement is the discipline to work
+                    through the pathway in order.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Fundamentals First -->
+    <section class="prose-section alt">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Why FORGE Starts at Zero</h2>
+            </div>
+            <div class="prose">
+                <p>
+                    Most industrial AI failures are not model failures. They are foundation failures: practitioners
+                    assembling code they cannot read, trusting outputs they cannot interrogate, and deploying
+                    systems they cannot maintain. AI coding tools have made it easier than ever to produce
+                    software without understanding — and in an industrial setting, unexamined software is a
+                    liability measured in scrap, downtime, and safety incidents.
+                </p>
+                <p>
+                    FORGE therefore teaches nothing it does not first build from the ground up. Learners implement
+                    methods from scratch before touching a framework, and every abstraction is opened at least
+                    once. It is a slower start and a far stronger finish.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- For Manufacturers -->
+    <section class="cta-section" id="manufacturers">
+        <div class="container">
+            <h2 class="cta-title">For Manufacturers</h2>
+            <p class="cta-description" style="max-width: 800px; margin-left: auto; margin-right: auto;">
+                Project FORGE is designed to work as workforce development infrastructure, not only as
+                individual study. If you run a plant or an operations team and want to pilot the curriculum
+                with your technicians or engineers — self-paced, cohort-based, or mapped to your own systems —
+                get in touch: contact@edikan.ai. Early pilot partners help shape the applied problem sets the
+                whole program uses.
+            </p>
+            <div class="cta-buttons">
+                <a href="mailto:contact@edikan.ai" class="btn btn-white">
+                    Contact the Program
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Latest from the Program -->
     <section class="blog-section">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">Latest from the Blog</h2>
-                <p class="section-description">
-                    Real stories, real struggles, real learning. Follow my journey from copy-paste coder to AI engineer.
-                </p>
+                <h2 class="section-title">Latest from the Program</h2>
             </div>
             
             <div class="blog-grid">
-                <!-- Featured Post 1 -->
-                <a href="posts/2025-09-10-fizzbuzz-confession.html" class="blog-card">
-                    <div class="blog-card-header">
-                        <p class="blog-category">Month 00 • The Confession</p>
-                        <h3 class="blog-title">My FizzBuzz Confession</h3>
-                    </div>
-                    <div class="blog-card-body">
-                        <p class="blog-excerpt">
-                            After 3 years of "coding," I couldn't write FizzBuzz without Google. 
-                            This is where my real journey begins.
-                        </p>
-                        <div class="blog-meta">
-                            <span>September 10, 2025</span>
-                            <span>5 min read</span>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Featured Post 2 -->
-                <a href="posts/2025-09-11-variable-amnesia.html" class="blog-card">
-                    <div class="blog-card-header">
-                        <p class="blog-category">Month 00 • Fundamentals</p>
-                        <h3 class="blog-title">Variable Amnesia</h3>
-                    </div>
-                    <div class="blog-card-body">
-                        <p class="blog-excerpt">
-                            When someone asked what x = 5 actually means in memory, I froze. 
-                            Time to understand variables properly.
-                        </p>
-                        <div class="blog-meta">
-                            <span>September 11, 2025</span>
-                            <span>8 min read</span>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Featured Post 3 -->
                 <a href="posts/2025-09-25-svd-missing-sensor-data.html" class="blog-card">
                     <div class="blog-card-header">
-                        <p class="blog-category">Month 1 • Mathematics</p>
-                        <h3 class="blog-title">SVD Saved Our Sensor Network</h3>
+                        <p class="blog-category">Phase 3 • Mathematical Foundations</p>
+                        <h3 class="blog-title">Recovering Missing Sensor Data with SVD</h3>
                     </div>
                     <div class="blog-card-body">
                         <p class="blog-excerpt">
-                            How Netflix's recommendation algorithm helped recover missing temperature data 
-                            and saved $2M annually.
+                            When a third of a plant's sensors fail mid-run, low-rank matrix methods can
+                            reconstruct the missing readings from the structure of the data that survives.
                         </p>
                         <div class="blog-meta">
                             <span>September 25, 2025</span>
-                            <span>12 min read</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="posts/why-fizzbuzz-matters.html" class="blog-card">
+                    <div class="blog-card-header">
+                        <p class="blog-category">Phase 1 • Foundations</p>
+                        <h3 class="blog-title">Why FizzBuzz Matters in Industrial AI</h3>
+                    </div>
+                    <div class="blog-card-body">
+                        <p class="blog-excerpt">
+                            The conditional logic behind a famous interview exercise is the same logic that
+                            runs temperature zones, quality gates, and sampling plans on a production line.
+                        </p>
+                        <div class="blog-meta">
+                            <span>September 10, 2025</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="posts/2025-09-11-variable-amnesia.html" class="blog-card">
+                    <div class="blog-card-header">
+                        <p class="blog-category">Phase 1 • Foundations</p>
+                        <h3 class="blog-title">What x = 5 Actually Means in Memory</h3>
+                    </div>
+                    <div class="blog-card-body">
+                        <p class="blog-excerpt">
+                            Variables are not boxes. Understanding references, copies, and mutability is the
+                            difference between debugging by reasoning and debugging by luck.
+                        </p>
+                        <div class="blog-meta">
+                            <span>September 11, 2025</span>
                         </div>
                     </div>
                 </a>
@@ -816,66 +1011,7 @@
             
             <div style="text-align: center;">
                 <a href="blog.html" class="btn btn-primary">
-                    View All Blog Posts →
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Features Section -->
-    <section class="features">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Why This Approach Works</h2>
-                <p class="section-description">
-                    Learning in public with structured milestones and real-world applications
-                </p>
-            </div>
-            
-            <div class="features-grid">
-                <div class="feature">
-                    <div class="feature-icon">🎯</div>
-                    <h3 class="feature-title">Structured Learning Path</h3>
-                    <p class="feature-description">
-                        18-month curriculum from basics to advanced industrial AI. 
-                        Each month builds on the previous, ensuring solid foundations.
-                    </p>
-                </div>
-                
-                <div class="feature">
-                    <div class="feature-icon">🏭</div>
-                    <h3 class="feature-title">Real Industrial Applications</h3>
-                    <p class="feature-description">
-                        Every concept applied to actual manufacturing problems. 
-                        Learn through steel production, sensor networks, and quality control.
-                    </p>
-                </div>
-                
-                <div class="feature">
-                    <div class="feature-icon">💻</div>
-                    <h3 class="feature-title">Multi-Language Mastery</h3>
-                    <p class="feature-description">
-                        Python, Rust, Julia, C++, R, SQL, and MATLAB. 
-                        Choose the right tool for each industrial challenge.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="cta-section">
-        <div class="container">
-            <h2 class="cta-title">Ready to Start Your Journey?</h2>
-            <p class="cta-description">
-                Join me in transforming from copy-paste coder to industrial AI engineer
-            </p>
-            <div class="cta-buttons">
-                <a href="blog.html" class="btn btn-white">
-                    📚 Start Reading the Blog
-                </a>
-                <a href="https://github.com/edikan-ai/edikan-ai-docs" target="_blank" class="btn btn-white">
-                    💻 Explore Code Examples
+                    View All Modules →
                 </a>
             </div>
         </div>
@@ -886,43 +1022,39 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h3>About edikan.ai</h3>
+                    <h3>About Project FORGE</h3>
                     <p>
-                        A public learning journey from programming fundamentals to industrial AI mastery. 
-                        Following the Project FORGE curriculum to build genuine expertise, not just surface knowledge.
+                        Project FORGE is an open-access industrial AI training initiative hosted at edikan.ai. Its
+                        mission is to build workforce capacity for American manufacturing, energy, and critical
+                        supply chain operations — from programming fundamentals to deployed optimization.
+                    </p>
+                    <p style="margin-top: 1rem;">
+                        Project FORGE was designed and is led by Edikan Udofia, an operations researcher at the
+                        Colorado School of Mines whose industrial work spans African energy and minerals operations
+                        and U.S. steel manufacturing.
                     </p>
                 </div>
                 
                 <div class="footer-section">
-                    <h3>Learning Path</h3>
+                    <h3>Program</h3>
                     <ul class="footer-links">
-                        <li><a href="blog.html">Blog</a></li>
-                        <li><a href="#project-forge">Project FORGE</a></li>
-                        <li><a href="https://github.com/edikan-ai/edikan-ai-docs">Code Examples</a></li>
+                        <li><a href="#pathway">Curriculum</a></li>
+                        <li><a href="framework.html">FORGE Framework</a></li>
+                        <li><a href="#manufacturers">For Manufacturers</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-section">
-                    <h3>Resources</h3>
+                    <h3>Connect</h3>
                     <ul class="footer-links">
                         <li><a href="https://github.com/edikan-ai/edikan-ai-docs">GitHub</a></li>
-                        <li><a href="https://linkedin.com/in/edikanudofa">LinkedIn</a></li>
                         <li><a href="mailto:contact@edikan.ai">Contact</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>Technologies</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Python</a></li>
-                        <li><a href="#">Rust & Julia</a></li>
-                        <li><a href="#">Industrial AI</a></li>
                     </ul>
                 </div>
             </div>
             
             <div class="footer-bottom">
-                <p>&copy; 2025 edikan.ai • Building in Public • Learning Every Day</p>
+                <p>&copy; 2026 Project FORGE / edikan.ai — Open-access industrial AI training</p>
             </div>
         </div>
     </footer>
