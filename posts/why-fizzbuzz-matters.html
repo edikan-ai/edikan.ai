@@ -432,7 +432,7 @@ for row in result:
             <div class="real-world-box">
                 <h3>🏭 Real-World Application: Sampling-Based Quality Control</h3>
                 <p>
-                    High-volume manufacturing lines — battery cells, fasteners, coils — cannot afford 
+                    High-volume manufacturing lines (battery cells, fasteners, coils) cannot afford 
                     to run every unit through every test. Instead, they use modulo-based sampling 
                     plans built on exactly the logic above:
                 </p>
@@ -444,7 +444,7 @@ for row in result:
                 <p>
                     The sampling intervals are chosen from statistical quality control theory so that 
                     the line catches process drift without testing every unit exhaustively. The 
-                    scheduling mechanism underneath is simple modulo arithmetic — FizzBuzz with a 
+                    scheduling mechanism underneath is simple modulo arithmetic: FizzBuzz with a 
                     production line attached.
                 </p>
             </div>
@@ -513,7 +513,7 @@ except Exception as e:
                 <h3>💰 The Real Cost of Getting It Wrong</h3>
                 <p>
                     Knight Capital lost about $440 million in under an hour on August 1, 2012, when a 
-                    deployment error left one server running old code behind a repurposed feature flag — 
+                    deployment error left one server running old code behind a repurposed feature flag:
                     at its core, a conditional-logic failure of exactly the kind this module trains you 
                     to reason about. The flag was supposed to select between order-handling paths; on 
                     the misconfigured server it activated dormant legacy code, and the system sent 

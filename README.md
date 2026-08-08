@@ -1,4 +1,4 @@
-# edikan.ai — Project FORGE
+# edikan.ai · Project FORGE
 
 This repository contains the source for [edikan.ai](https://edikan.ai), the home of
 **Project FORGE**, an open-access industrial AI training initiative.
@@ -6,8 +6,8 @@ This repository contains the source for [edikan.ai](https://edikan.ai), the home
 ## What Project FORGE Is
 
 Project FORGE is a structured, 18-month training pathway from programming fundamentals to
-industrial optimization expertise — free, open, and built for the practitioners American
-industry runs on: technicians, plant engineers, and analysts who cannot access traditional
+industrial optimization expertise: free, open, and built for the practitioners American
+industry runs on, for technicians, plant engineers, and analysts who cannot access traditional
 graduate education.
 
 The 18-month curriculum covers seven programming languages — Python, Rust, Julia, C++, R,
@@ -21,13 +21,13 @@ The full curriculum architecture is documented on the
 
 ## Repository Layout
 
-- `index.html` — homepage
-- `framework.html` — the FORGE Framework (curriculum architecture)
-- `blog.html` — index of published curriculum modules
-- `posts/` — published modules, plus redirect stubs for retired URLs
-- `archive/` — v1 site content and tooling, retained for the record and excluded from
+- `index.html`: homepage
+- `framework.html`: the FORGE Framework (curriculum architecture)
+- `blog.html`: index of published curriculum modules
+- `posts/`: published modules, plus redirect stubs for retired URLs
+- `archive/`: v1 site content and tooling, retained for the record and excluded from
   search indexing (`noindex`); nothing has been deleted
-- `proforge/` — ProForge, a deployed prescriptive-operations demo application
+- `proforge/`: ProForge, a deployed prescriptive-operations demo application
 
 ## Editorial Standards
 

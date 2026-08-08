@@ -37,7 +37,7 @@
             <div class="post-content">
                 <p>Picture this: a steel mill instrumented with 200 temperature sensors, and 30% of them fail during a critical production run. Stopping production is enormously expensive. Ignoring the gaps risks equipment damage. And traditional interpolation won't work, because the sensors are interconnected in ways a simple average cannot capture.</p>
 
-                <p>The mathematics that solves this problem is the same mathematics behind modern recommender systems — predicting the movie ratings a user never entered, from the structure of the ratings they did. It's called Singular Value Decomposition (SVD), and it is one of the most practically useful tools in the industrial linear algebra toolkit.</p>
+                <p>The mathematics that solves this problem is the same mathematics behind modern recommender systems: predicting the movie ratings a user never entered, from the structure of the ratings they did. It's called Singular Value Decomposition (SVD), and it is one of the most practically useful tools in the industrial linear algebra toolkit.</p>
 
                 <h2>The Netflix Connection</h2>
 
@@ -366,7 +366,7 @@ class OnlineSVD:
                 <ul>
                     <li>Factor 1: The main heating cycle (dominating the variance)</li>
                     <li>Factor 2: The cooling gradient from inlet to outlet</li>
-                    <li>Factor 3: A smaller disturbance — often traceable to nearby equipment</li>
+                    <li>Factor 3: A smaller disturbance, often traceable to nearby equipment</li>
                 </ul>
 
                 <p>When you reach that point, you are not just filling in missing numbers. You are understanding the system better than complete data alone would have taught you.</p>
@@ -377,13 +377,13 @@ class OnlineSVD:
                     <strong>Mistakes to avoid:</strong><br><br>
                     
                     <strong>1. Using too many components:</strong><br>
-                    More isn't better — with too many components the model overfits the noise. Use cross-validation to find the sweet spot (often 5–15 for a ~100-sensor network).<br><br>
+                    More isn't better: with too many components the model overfits the noise. Use cross-validation to find the sweet spot (often 5–15 for a ~100-sensor network).<br><br>
                     
                     <strong>2. Not centering data:</strong><br>
                     Always subtract the mean. SVD assumes centered data; skip this and the reconstruction can produce physically impossible values.<br><br>
                     
                     <strong>3. Ignoring the physics:</strong><br>
-                    If SVD says two sensors are perfectly correlated, check the units before celebrating — one may be in Celsius and the other in Fahrenheit. Always sanity-check against plant knowledge.<br><br>
+                    If SVD says two sensors are perfectly correlated, check the units before celebrating: one may be in Celsius and the other in Fahrenheit. Always sanity-check against plant knowledge.<br><br>
                     
                     <strong>4. Trusting SVD with too much missing data:</strong><br>
                     Beyond roughly 60% missing, reconstruction quality degrades sharply. Have a fallback plan.<br><br>
@@ -395,7 +395,7 @@ class OnlineSVD:
                 <h2>Where to Learn More</h2>
 
                 <ul>
-                    <li><strong>Koren, Bell &amp; Volinsky (2009):</strong> "Matrix Factorization Techniques for Recommender Systems," <em>IEEE Computer</em> — the canonical account of the Netflix Prize methods</li>
+                    <li><strong>Koren, Bell &amp; Volinsky (2009):</strong> "Matrix Factorization Techniques for Recommender Systems," <em>IEEE Computer</em>, the canonical account of the Netflix Prize methods</li>
                     <li><strong>Numerical Recipes</strong> (Press et al.): the implementation details that matter</li>
                     <li><strong>Your own data:</strong> Take any spreadsheet with gaps and try SVD</li>
                 </ul>
