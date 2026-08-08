@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Functions: Contracts, Scope, and Side Effects - edikan.ai</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 15px;
+        }
+        
+        article {
+            background: white;
+            border-radius: 10px;
+            padding: 40px;
+            margin: 20px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .post-header {
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 2.2rem;
+            line-height: 1.3;
+        }
+        
+        .post-meta {
+            color: #999;
+            font-size: 0.9em;
+        }
+        
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .personal-story {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin: 25px 0;
+            font-style: italic;
+        }
+        
+        .exercise-box {
+            background: #f0f8ff;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+        
+        .truth-bomb {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 25px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <article>
+            <div class="post-header">
+                <h1>Functions: Contracts, Scope, and Side Effects</h1>
+                <div class="post-meta">
+                    Phase 1: Foundations • Published September 13, 2025 • Revised August 8, 2026
+                </div>
+            </div>
+            
+            <div class="post-content">
+                <p>There is a common way of "writing" functions that is really assembling them: search for a function that looks close, copy it, rename the variables, and hope. When it breaks, copy a different one. Code produced this way can pass a demo and still be unexplainable by the person who shipped it, and unexplainable code cannot be debugged under production pressure.</p>
+
+                <p>Consider a function assembled exactly that way:</p>
+
+                <div class="code-block">
+def process_temperature_data(readings, window=10, threshold=None):
+    """Process temperature readings with moving average."""
+    if threshold is None:
+        threshold = []   # Why is threshold a list? Nobody knows.
+
+    if not hasattr(process_temperature_data, 'history'):
+        process_temperature_data.history = []   # What does this do?
+
+    process_temperature_data.history.extend(readings)  # Why does this matter?
+
+    result = [sum(readings[i:i+window])/window
+              for i in range(len(readings)-window+1)]
+    return result if result else readings
+</div>
+
+                <p>It "works" sometimes. This module builds the understanding needed to see exactly what is wrong with it: scope, return semantics, mutable defaults, and side effects.</p>
+
+                <h2>What Functions Actually Are</h2>
+
+                <h3>1. Functions Are Not Just Named Code Blocks</h3>
+
+                <div class="code-block">
+# The naive view of functions:
+def calculate_stuff():
+    # Some code here
+    x = 10
+    y = 20
+    print(x + y)
+
+# What it misses: Functions create a new scope!
+x = 100
+calculate_stuff()  # Prints 30, not 120
+print(x)  # Still 100, function didn't change global x
+                </div>
+
+                <h3>2. The Return vs Print Confusion</h3>
+
+                <div class="code-block">
+# A constant beginner mistake:
+def get_average(numbers):
+    avg = sum(numbers) / len(numbers)
+    print(avg)  # WRONG! This just displays
+
+result = get_average([1, 2, 3])
+print(result)  # None! The function returned nothing
+
+# The correct version:
+def get_average(numbers):
+    avg = sum(numbers) / len(numbers)
+    return avg  # Actually gives back the value
+
+result = get_average([1, 2, 3])  # Now result = 2.0
+                </div>
+
+                <h3>3. The Mutable Default Argument Trap</h3>
+
+                <div class="code-block">
+# A bug that can haunt production for weeks:
+def log_reading(value, history=[]):  # DANGER!
+    history.append(value)
+    return history
+
+# First sensor
+sensor1_log = log_reading(100)  # [100]
+sensor1_log = log_reading(102)  # [100, 102] - Expected!
+
+# Second sensor - SURPRISE!
+sensor2_log = log_reading(200)  # [100, 102, 200] - WHAT?!
+# Both sensors share the SAME list!
+                </div>
+
+                <h2>Functions in Industrial Systems</h2>
+
+                <h3>Pure Functions vs Side Effects</h3>
+
+                <div class="code-block">
+# PURE FUNCTION - Predictable, testable
+def celsius_to_fahrenheit(celsius):
+    """Always returns same output for same input."""
+    return (celsius * 9/5) + 32
+
+# SIDE EFFECTS - Harder to test, can cause bugs
+sensor_state = {'alerts': [], 'readings': []}
+
+def check_temperature(temp):
+    """Modifies external state - side effect!"""
+    if temp > 1500:
+        sensor_state['alerts'].append(f"High temp: {temp}")  # Side effect
+        send_email_alert()  # Another side effect
+    sensor_state['readings'].append(temp)  # And another
+    return temp > 1500
+                </div>
+
+                <h3>Function Composition</h3>
+
+                <div class="code-block">
+# Small, focused functions
+def read_sensor(sensor_id):
+    """Read single sensor value."""
+    return sensor_readings[sensor_id]
+
+def validate_reading(value, min_val=0, max_val=2000):
+    """Check if reading is valid."""
+    return min_val <= value <= max_val
+
+def convert_to_celsius(fahrenheit):
+    """Convert F to C."""
+    return (fahrenheit - 32) * 5/9
+
+def process_sensor(sensor_id):
+    """Compose smaller functions."""
+    raw_value = read_sensor(sensor_id)
+    if validate_reading(raw_value):
+        return convert_to_celsius(raw_value)
+    return None
+                </div>
+
+                <div class="truth-bomb">
+                    <strong>The Core Idea:</strong><br>
+                    Functions are contracts. The signature promises what goes in, the return promises what 
+                    comes out, and side effects are the fine print. Break the contract, or fail to read 
+                    the fine print, and production breaks with it.
+                </div>
+
+                <h2>Exercise: Function Mastery</h2>
+
+                <div class="exercise-box">
+                    <h3>Build a Temperature Alert System</h3>
+                    
+                    <p>Each of these functions has a real bug. Fix all four, then combine them into a working alert system:</p>
+                    
+                    <div class="code-block">
+# Fix these broken functions:
+
+def calculate_average(readings, last_n):
+    """Calculate average of last n readings."""
+    # BUG: What if readings has fewer than last_n elements?
+    return sum(readings[-last_n:]) / last_n
+
+def add_alert(message, alerts=[]):
+    """Add alert to list."""
+    # BUG: Mutable default argument!
+    alerts.append(message)
+    return alerts
+
+def check_sensor_health(readings):
+    """Check if sensor is working properly."""
+    avg = sum(readings) / len(readings)
+    print(f"Average: {avg}")
+    # BUG: No return statement!
+
+def process_batch(sensor_data):
+    """Process batch of sensor data."""
+    for reading in sensor_data:
+        if reading > 1500:
+            alert = True
+        else:
+            alert = False
+    return alert  # BUG: Only returns last value!
+
+# Your challenge: Fix all bugs and create a working system
+                    </div>
+                </div>
+
+                <h2>The Function Mastery Checklist</h2>
+
+                <div class="truth-bomb">
+                    <strong>On exit from this module you should be able to say:</strong><br>
+                    ✓ I can explain what parameters vs arguments are<br>
+                    ✓ I understand scope and namespace<br>
+                    ✓ I know when to use return vs print<br>
+                    ✓ I can identify and fix side effects<br>
+                    ✓ I understand *args and **kwargs<br>
+                    ✓ I can write pure functions<br>
+                    ✓ I know why mutable defaults are dangerous
+                </div>
+
+                <div class="next-post">
+                    <p>With the Phase 1 foundations in place, the mathematics phase begins, starting with a linear algebra tool that solves a real plant problem.</p>
+                    <a href="2025-09-25-svd-missing-sensor-data.html">Next: Recovering Missing Sensor Data with SVD →</a>
+                </div>
+            </div>
+        </article>
+    </div>
+</body>
+</html>

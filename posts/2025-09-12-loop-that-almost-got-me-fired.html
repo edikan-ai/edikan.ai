@@ -161,7 +161,7 @@
                     A monitoring loop is deployed to watch furnace temperature. The loop's exit condition 
                     depends on a sensor flag that, under a failure mode nobody tested, never changes. The 
                     loop runs forever, its collection list grows without bound, memory is exhausted, and 
-                    the monitoring system — the thing meant to protect the equipment — is what crashes. 
+                    the monitoring system, the thing meant to protect the equipment, is what crashes. 
                     This module teaches you to write loops where that cannot happen.
                 </div>
 
@@ -220,7 +220,7 @@ while sensor.temperature < 1500 and counter < max_iterations:
 
                 <h3>2. The For Loop Misconception</h3>
 
-                <p>For loops feel safe. They're not — especially when the collection being iterated is also being modified:</p>
+                <p>For loops feel safe. They're not, especially when the collection being iterated is also being modified:</p>
 
                 <div class="code-block">
 # The memory disaster:
@@ -507,8 +507,8 @@ class ProductionMonitor:
                 </div>
 
                 <div class="next-post">
-                    <p>Loops decide how often code runs. Functions decide how it's organized — and misused, they fail in subtler ways.</p>
-                    <a href="2025-09-13-functions-more-than-copy-paste.html">Next: Functions — Contracts, Scope, and Side Effects →</a>
+                    <p>Loops decide how often code runs. Functions decide how it's organized, and misused, they fail in subtler ways.</p>
+                    <a href="functions-and-abstraction.html">Next: Functions: Contracts, Scope, and Side Effects →</a>
                 </div>
             </div>
         </article>
